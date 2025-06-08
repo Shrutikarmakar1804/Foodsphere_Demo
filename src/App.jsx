@@ -8,7 +8,7 @@ import { findUserCart } from './component/State/Cart/Action';
 import { getRestaurantById } from './component/State/Restaurant/Action';
 import process from 'process';
 import { Routers } from './component/Routers/Routers';
-
+import { SnackbarProvider } from 'notistack'; 
 
 window.process = process;
 
@@ -16,9 +16,7 @@ function App() {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
 
-  // Selector should grab the whole auth state, not just auth.user
   const auth = useSelector((store) => store.auth);
-
   const token = auth?.jwt || jwt;
 
   useEffect(() => {
@@ -36,8 +34,14 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Routers />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        autoHideDuration={3000}
+      >
+        <CssBaseline />
+        <Routers />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

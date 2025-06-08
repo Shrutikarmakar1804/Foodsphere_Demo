@@ -70,7 +70,7 @@ export const Events = () => {
                 />
                 <Grid>
 
-                <Grid item xs={12}>
+                <Grid size= {{ xs:12}}>
                     <TextField
                       name="location"
                       label="Location"
@@ -81,7 +81,7 @@ export const Events = () => {
                     />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid size= {{ xs:12}}>
                     <TextField
                       name="name"
                       label="Event Name"
@@ -92,7 +92,7 @@ export const Events = () => {
                     />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid size= {{ xs:12}}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DateTimePicker
                       renderInput={(props)=> <TextField {...props}/>}
@@ -107,7 +107,7 @@ export const Events = () => {
                     </LocalizationProvider>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid size= {{ xs:12 }}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DateTimePicker
                       renderInput={(props)=> <TextField {...props}/>}

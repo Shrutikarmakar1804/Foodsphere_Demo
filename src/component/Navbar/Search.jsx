@@ -125,7 +125,7 @@ const MOCK_FOOD_DATA = [
   },
   {
     name: "Chocolate Mousse",
-    image: "https://images.pexels.com/photos/3026810/pexels-photo-3026810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://images.pexels.com/photos/17433352/pexels-photo-17433352/free-photo-of-combination-plate-with-maharstrian-food.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     restaurant: "Sweet Indulgence"
   },
   {

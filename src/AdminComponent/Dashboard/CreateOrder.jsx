@@ -1,7 +1,7 @@
 import { AddPhotoAlternate } from '@mui/icons-material'
 import { Box, Button, Chip, CircularProgress, FormControl, Grid, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material'
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { uploadImageToCloudinary } from '../util/UploadToCloudinary';
 
@@ -17,7 +17,7 @@ const initialValues = {
   images:[],
 };
 
-const CreateMenuForm = () => {
+const CreateOrder = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const formik=useFormik({
     initialValues,
@@ -43,11 +43,11 @@ const CreateMenuForm = () => {
     <div className="py-20 px-20 lg:flex itmes-center justify-center min-h-screen">
      <div className="lg:max-w-4xl">
      <h1 className="font-bold text-2xl text-center py-2">
-        Add New Menu
+        Create New Order
       </h1>
       <form onSubmit={formik.handleSubmit} className="space-y-5">
         <Grid container spacing={5}>
-          <Grid className="flex flex-wrap gap-3" size= {{ xs:12}} >
+          <Grid className="flex flex-wrap gap-3" item xs={12} lg={6}>
               <input
               accept='image/*'
               id='fileinput'
@@ -180,7 +180,7 @@ const CreateMenuForm = () => {
           )}
         //MenuProps={MenuProps}
         >
-          {["bread", "Sauce", "chicken"].map((name,index) => (
+          {["Bread", "Sauce", "Chicken", "Biryani"].map((name,index) => (
             <MenuItem
               key={name}
               value={name}
@@ -230,11 +230,11 @@ const CreateMenuForm = () => {
               </FormControl>
               </Grid>
         </Grid>
-        <Button variant="contained" color="primary" type="submit">Create Menu</Button>
+        <Button variant="contained" color="primary" type="submit">Add-Menu</Button>
       </form>
      </div>
     </div>
   )
 }
 
-export default CreateMenuForm;
+export default CreateOrder;

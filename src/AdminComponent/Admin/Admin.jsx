@@ -1,4 +1,3 @@
-import React from 'react'
 import { AdminSideBar } from './AdminSideBar'
 import { Route, Routes } from 'react-router-dom'
 import { RestaurantDashboard } from '../Dashboard/Dashboard'
@@ -9,6 +8,7 @@ import Ingredients from '../Ingredients/Ingredients'
 import { Events } from '../Events/Events'
 import RestaurantDetails from './RestaurantDetails'
 import CreateMenuForm from '../Menu/CreateMenuForm'
+import CreateOrder from '../Dashboard/CreateOrder'
 
 
 
@@ -32,6 +32,7 @@ export const Admin = () => {
                         <Route path='/event' element={<Events/>}/>
                         <Route path='/details' element={<RestaurantDetails/>}/>
                         <Route path='/add-menu' element={<CreateMenuForm />}/>
+                        <Route path='/create-order' element={<CreateOrder />}/>
                     </Routes>
                 </div>
         </div>
