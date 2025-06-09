@@ -2,7 +2,8 @@ import { Box, Card, CardHeader, IconButton, Modal, Paper, Table, TableBody, Tabl
 import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import CreateIngredientCategoryForm from './CreateIngredientCatagoryForm';
-import { Style } from '@mui/icons-material';
+
+
 const orders=[1,1,1,1];
 const style = {
   position: 'absolute',
@@ -23,12 +24,13 @@ export default function IngredientCategoryTable() {
     const handleClose = () => setOpen(false);
   return (
   <Box>
-      <Card className='mt-1'>
+      <Card className='mt-3' sx={{ bgcolor: '#121212', color: '#fff' }} elevation={6}>
         <CardHeader  action={
           <IconButton  onClick={handleOpen} aria-label="settings">
             <CreateIcon />
           </IconButton>
-        } title={"Ingredient Category"} sx={{pt:5,alignItems:"left"}} />
+        } 
+        title={"Ingredient Category"} sx={{ pt: 5, alignItems: "left", width: "28vw" }} />
          <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>

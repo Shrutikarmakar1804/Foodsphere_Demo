@@ -1,71 +1,115 @@
-import { Box, Card, CardHeader, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import React from 'react'
+import {
+  Avatar,
+  Box,
+  Card,
+  CardHeader,
+  IconButton,
+  Modal,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import React from 'react';
 import CreateIcon from '@mui/icons-material/Create';
 import CreateFoodCategoryForm from './CreateFoodCategoryForm';
-const orders=[1,1];
-const style = {
+import { motion, AnimatePresence } from 'framer-motion';
+
+const foodCategories = [
+  { id: 1, name: 'Starters' },
+  { id: 2, name: 'Main Course' },
+  { id: 3, name: 'Desserts' },
+  { id: 4, name: 'Beverages' },
+];
+
+const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+  outline: 0,
 };
 
-
 export default function FoodCategoryTable() {
-
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <Box>
-      <Card className='mt-1'>
-        <CardHeader  
-        action={
-          <IconButton onClick={handleOpen} aria-label="settings">
-            <CreateIcon />
-          </IconButton>
-        } title={"Food Category"} sx={{pt:5,alignItems:"center"}} />
-         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left"> Id </TableCell>
-            <TableCell align="left"> Name </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {orders.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&: td, &: th': { border: 5 } }}
-            >
-              <TableCell component="th" scope="row">
-                {1}
-              </TableCell>
-              <TableCell align="left">{"Name"}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-      </Card>
+    <Box className="bg-gray-900 min-h-screen text-white">
+      {/* Gradient Header */}
+      <header className="bg-[#f50057] p-6 flex items-center justify-between">
+        <h1 className="text-lg font-bold uppercase tracking-wider">Products</h1>
+      </header>
 
+      {/* Main Content */}
+      <main className="p-6">
+        <Card className="bg-gray-800 text-white shadow-lg rounded-xl overflow-hidden">
+          <CardHeader
+            title="Food Categories"
+            action={
+              <IconButton onClick={handleOpen} aria-label="add" className="text-white hover:text-blue-400">
+                <CreateIcon />
+              </IconButton>
+            }
+            sx={{ pt: 3, pb: 1, px: 3 }}
+          />
+          <TableContainer component={Paper} className="bg-gray-800">
+            <Table sx={{ minWidth: 300 }} aria-label="food categories table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" className="text-white">ID</TableCell>
+                  <TableCell align="left" className="text-white">Name</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {foodCategories.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    hover
+                  >
+                    <TableCell component="th" scope="row" className="text-white">
+                      {row.id}
+                    </TableCell>
+                    <TableCell align="left" className="text-white">
+                      {row.name}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Card>
+      </main>
+
+      {/* Modal with Framer Motion */}
       <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-  <Box sx={style}>
-  <CreateFoodCategoryForm/> 
-  </Box>
-</Modal>
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="add-food-category-modal"
+        closeAfterTransition
+      >
+        <Box sx={modalStyle}>
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.25 }}
+                className="bg-gray-900 text-white p-6 rounded-xl shadow-2xl w-[90vw] max-w-md"
+              >
+                <CreateFoodCategoryForm />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Box>
+      </Modal>
     </Box>
-  )
+  );
 }

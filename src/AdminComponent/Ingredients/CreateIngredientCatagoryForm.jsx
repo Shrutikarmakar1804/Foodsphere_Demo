@@ -1,51 +1,73 @@
-import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import { Button, TextField, Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-const CreateIngredientCategoryForm = () => {
-    const [formData, setFormData] = useState({
-        name:"",
-    });
-    const handleSubmit = () => {
+const CreateIngredientCatagoryForm = () => {
+  const [formData, setFormData] = useState({
+    categoryName: '',
+    restaurantId: '',
+  });
 
-        const data={
-            name:formData.categoryName,
-            restaurantId:{
-                id:1
-            },
-        };
-        console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: formData.categoryName,
+      restaurantId: {
+        id: parseInt(formData.restaurantId, 10),
+      },
     };
-        const handleInputChange = (e) => {
-            const {name,value}=e.target
-            setFormData({
-                ...formData,[name]:value,
-            })
-        }
-  return (
-    <div className=''>
-        <div className="p-5">
-            <h3 className="text-gray-400 text-center text-xl pb-10">
-                Create Ingredient Category
-            </h3>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    <TextField fullWidth
-                                label="Catagory Name"
-                                id="name"
-                                name="categoryname"
-                                varient="outlined"
-                                onChange={handleInputChange}
-                                value={formData.catagoryname}
-                                >               
-                    </TextField>
-                    <Button variant="contained" type="submit"> 
-                        Create Ingredient Category 
-                    </Button>
-                </form>
 
-        </div>
-    
-    </div>
+    console.log(data);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Paper elevation={3} className="p-6 rounded-lg bg-gray-800 text-white shadow-xl w-full">
+        <h3 className="text-xl text-center font-semibold mb-6 text-gray-300">
+          Create Ingredients
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <TextField
+              fullWidth
+              label="Category Name"
+              id="categoryName"
+              name="categoryName"
+              variant="outlined"
+              onChange={handleInputChange}
+              value={formData.categoryName}
+              InputLabelProps={{ style: { color: '#ccc' } }}
+              InputProps={{ style: { color: '#fff' } }}
+            />
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              className="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold"
+            >
+              Create Ingredient Category
+            </Button>
+          </div>
+        </form>
+      </Paper>
+    </motion.div>
   );
 };
 
-export default CreateIngredientCategoryForm;
+export default CreateIngredientCatagoryForm;

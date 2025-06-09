@@ -1,60 +1,85 @@
-import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import { Button, TextField, Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const CreateFoodCategoryForm = () => {
-    const [formData, setFormData] = useState({categoryName:"",restaurantId:""});
-    const handleSubmit = () => {
+  const [formData, setFormData] = useState({
+    categoryName: '',
+    restaurantId: '',
+  });
 
-        const data={
-            name:formData.categoryName,
-            restaurantId:{
-                id:1
-            },
-        };
-        console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: formData.categoryName,
+      restaurantId: {
+        id: parseInt(formData.restaurantId, 10),
+      },
     };
-        const handleInputChange = (e) => {
-            const {name,value}=e.target
-            setFormData({
-                ...formData,[name]:value,
-            })
-        }
+
+    console.log(data);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
-    <div className=''>
-        <div className="p-5">
-            <h3 className="text-gray-400 text-center text-xl pb-10">
-                Create Food Category
-            </h3>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    <TextField fullWidth
-                                label="Food Catagory Name"
-                                id="categoryName"
-                                name="categoryName"
-                                varient="outlined"
-                                onChange={handleInputChange}
-                                value={FormData.categoryName}
-                                >
-                    
-                    </TextField>
-
-                    <TextField fullWidth
-                                label="Restaurant Id"
-                                id="restaurantId"
-                                name="restaurantId"
-                                varient="outlined"
-                                onChange={handleInputChange}
-                                value={FormData.restaurantId}
-                                >
-                    
-                    </TextField>
-                    <Button variant="contained" type="submit"> 
-                        Create Category 
-                    </Button>
-                </form>
-
-        </div>
-    
-    </div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Paper elevation={3} className="p-6 rounded-lg bg-gray-800 text-white shadow-xl w-full">
+        <h3 className="text-xl text-center font-semibold mb-6 text-gray-300">
+          Create Food Category
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <TextField
+              fullWidth
+              label="Food Category Name"
+              id="categoryName"
+              name="categoryName"
+              variant="outlined"
+              onChange={handleInputChange}
+              value={formData.categoryName}
+              InputLabelProps={{ style: { color: '#ccc' } }}
+              InputProps={{ style: { color: '#fff' } }}
+            />
+          </div>
+          <div>
+            <TextField
+              fullWidth
+              label="Restaurant ID"
+              id="restaurantId"
+              name="restaurantId"
+              variant="outlined"
+              onChange={handleInputChange}
+              value={formData.restaurantId}
+              InputLabelProps={{ style: { color: '#ccc' } }}
+              InputProps={{ style: { color: '#fff' } }}
+            />
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              className="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold"
+            >
+              Create Category
+            </Button>
+          </div>
+        </form>
+      </Paper>
+    </motion.div>
   );
 };
 

@@ -6,10 +6,10 @@ export default function Ingredients() {
   return (
     <div className="px-4 py-4">
       <Grid container spacing={2}>
-        <Grid item xs={12} lg={8}>
+        <Grid size={{ xs:6, lg:6 }} >
           <IngredientTable />
         </Grid>
-        <Grid item xs={12} lg={4}>
+        <Grid size={{ xs:6 }} >
           <IngredientCategoryTable />
         </Grid>
       </Grid>
