@@ -1,5 +1,4 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Cart from "../Cart/Cart";
 import Contact from "../Navbar/Contact";
 import Home from "../Home/Home";
 import Navbar from "../Navbar/Navbar";
@@ -14,6 +13,7 @@ import About from "../Navbar/About";
 import Terms from "../Navbar/Terms";
 import Search from "../Navbar/Search";
 import Profile from "../Profile/Profile";
+import Cart from "../Cart/Cart";
 
 export const CustomerRoute = () => {
   const location = useLocation();
@@ -21,7 +21,6 @@ export const CustomerRoute = () => {
   return (
     <div>
       
-
       <Navbar />
       <Routes>
         <Route path="/*" element={<Home />} />

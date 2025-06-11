@@ -24,9 +24,11 @@ export const Orders = () => {
             Order Status
           </Typography>
           <RadioGroup row value={filter} onChange={handleFilter}>
+            <FormControlLabel value="All" control={<Radio />} label="All" />
             <FormControlLabel value="Pending" control={<Radio />} label="Pending" />
             <FormControlLabel value="Completed" control={<Radio />} label="Completed" />
-            <FormControlLabel value="All" control={<Radio />} label="All" />
+            <FormControlLabel value="Cancelled" control={<Radio />} label="Cancelled" />
+            
           </RadioGroup>
         </Box>
       </Card>

@@ -95,6 +95,7 @@ export default function OrderTable({ filter }) {
     if (filter === "All") return true;
     if (filter === "Pending") return order.status.toLowerCase() === "preparing";
     if (filter === "Completed") return order.status.toLowerCase() === "completed";
+    if (filter === "Cancelled") return order.status.toLowerCase() === "cancelled";
     return true;
   });
 

@@ -19,10 +19,14 @@ import CreateFoodCategoryForm from './CreateFoodCategoryForm';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const foodCategories = [
-  { id: 1, name: 'Starters' },
-  { id: 2, name: 'Main Course' },
-  { id: 3, name: 'Desserts' },
-  { id: 4, name: 'Beverages' },
+  { id: "FOOD01", name: 'Biryani' },
+  { id: "FOOD02", name: 'Fried Chicken Wings' },
+  { id: "FOOD03", name: 'Chicken Sausage Pizza' },
+  { id: "FOOD03", name: 'Coca-Cola' },
+  { id: "FOOD03", name: 'Pepsi' },
+  { id: "FOOD03", name: 'Butter Panner Masala' },
+  { id: "FOOD03", name: 'Chocolate "Cake' },
+  { id: "FOOD03", name: 'Mango Mouse' }
 ];
 
 const modalStyle = {
@@ -62,8 +66,8 @@ export default function FoodCategoryTable() {
             <Table sx={{ minWidth: 300 }} aria-label="food categories table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left" className="text-white">ID</TableCell>
-                  <TableCell align="left" className="text-white">Name</TableCell>
+                  <TableCell align="left" className="text-white">Food ID</TableCell>
+                  <TableCell align="left" className="text-white">Food Name</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
