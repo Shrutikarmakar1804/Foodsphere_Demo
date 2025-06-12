@@ -10,6 +10,7 @@ import CreateEvent from '../Events/CreateEvent'
 import Events from '../Events/Events'
 import Orders from '../Orders/Orders'
 import Menu from '../Menu/Menu'
+import CreateRestaurantForm from '../CreateRestaurantForm/CreateRestaurantForm'
 
 
 

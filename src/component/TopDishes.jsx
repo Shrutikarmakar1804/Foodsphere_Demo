@@ -53,29 +53,43 @@ const initialItems = [
     id: 7,
     name: "Pizza",
     desc: "Pizza is a savory dish with dough, tomatoes, cheese, and various toppings.",
-    image: "https://source.unsplash.com/300x200/?pizza",
+    image: "https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&cs=tinysrgb&w=600",
     price: 250
   },
   {
     id: 8,
     name: "Sushi",
     desc: "Sushi is a Japanese dish with vinegared rice and seafood or vegetables.",
-    image: "https://source.unsplash.com/300x200/?sushi",
+    image: "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     price: 350
   },
   {
     id: 9,
     name: "Tacos",
     desc: "Tacos are a traditional Mexican dish in a folded tortilla.",
-    image: "https://source.unsplash.com/300x200/?tacos",
+    image: "https://images.pexels.com/photos/7613563/pexels-photo-7613563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     price: 200
   },
   {
     id: 10,
     name: "Chocolate Cake",
     desc: "Chocolate cake is a rich dessert often layered with chocolate icing.",
-    image: "https://source.unsplash.com/300x200/?chocolate,cake",
+    image: "https://images.pexels.com/photos/697571/pexels-photo-697571.jpeg?auto=compress&cs=tinysrgb&w=600",
     price: 150
+  },
+  {
+    id: 11,
+    name: "Caesar Salad",
+    desc: "A classic salad with romaine lettuce, croutons, and Caesar dressing.",
+    image: "https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    price: 130
+  },
+  {
+    id: 12,
+    name: "Grilled Salmon",
+    desc: "A healthy dish featuring grilled salmon with herbs and spices.",
+    image: "https://images.pexels.com/photos/842142/pexels-photo-842142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    price: 400
   }
 ];
 
