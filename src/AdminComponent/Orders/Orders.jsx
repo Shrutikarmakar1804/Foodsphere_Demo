@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import OrderTable from './OrderTable';
 
-export const Orders = () => {
+const Orders = () => {
   const [filter, setFilter] = useState("All"); // Default: All
 
   const handleFilter = (e) => {
@@ -37,3 +37,5 @@ export const Orders = () => {
     </div>
   );
 };
+
+export default Orders;

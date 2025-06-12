@@ -75,7 +75,7 @@ const orders = [
   },
 ];
 
-export default function OrderTable({ filter }) {
+export default function OrderTable({ filter = "All" }) {
   const navigate = useNavigate();
 
   const getStatusColor = (status) => {
@@ -114,7 +114,7 @@ export default function OrderTable({ filter }) {
                 variant="contained"
                 size="small"
                 sx={{ mt: 1 }}
-                onClick={() => navigate("/orders/create")}
+                onClick={() => navigate("admin/orders/create")}
               >
                 + Manage Orders
               </Button>

@@ -59,7 +59,14 @@ const CreateIngredientCatagoryForm = () => {
               variant="contained"
               type="submit"
               fullWidth
-              className="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold"
+              sx={{
+                backgroundColor: 'blue',
+                color: 'black',
+                fontWeight: '400',
+                '&:hover': {
+                  backgroundColor: '#67e8f9',
+                },
+              }}
             >
               Create Ingredient Category
             </Button>

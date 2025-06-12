@@ -1,26 +1,14 @@
 import {
-  Box,
-  Card,
-  CardHeader,
-  IconButton,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Avatar,
-  Typography,
-  Button
+  Box, Card, CardHeader, IconButton, Paper, Table,
+  TableBody, TableCell, TableContainer, TableHead,
+  TableRow, Avatar, Typography, Button
 } from '@mui/material';
 import { Delete, AddCircleOutline } from '@mui/icons-material';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdMenuBook } from "react-icons/md";
 
-const menus = [
+const defaultMenus = [
   {
     id: 1,
     image: "https://images.pexels.com/photos/16020573/pexels-photo-16020573/free-photo-of-rice-and-chicken-meal-on-the-plate.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -49,9 +37,25 @@ const menus = [
 
 export default function MenuTable() {
   const navigate = useNavigate();
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    const savedMenus = JSON.parse(localStorage.getItem("menus"));
+    if (savedMenus && savedMenus.length > 0) {
+      setMenus(savedMenus);
+    } else {
+      setMenus(defaultMenus);
+    }
+  }, []);
 
   const handleAddMenuClick = () => {
     navigate("/admin/restaurants/add-menu");
+  };
+
+  const handleDelete = (id) => {
+    const updatedMenus = menus.filter(menu => menu.id !== id);
+    setMenus(updatedMenus);
+    localStorage.setItem("menus", JSON.stringify(updatedMenus));
   };
 
   return (
@@ -90,33 +94,23 @@ export default function MenuTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {menus.map((item) => (
-                <motion.tr
-                  key={item.id}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ cursor: "pointer" }}
-                >
+              {menus.map((item, idx) => (
+                <TableRow key={idx}>
                   <TableCell>
-                    <Avatar
-                      variant="rounded"
-                      src={item.image}
-                      alt={item.title}
-                      sx={{ width: 56, height: 56 }}
-                    />
+                    <Avatar variant="rounded" src={item.image} alt={item.title} sx={{ width: 56, height: 56 }} />
                   </TableCell>
                   <TableCell>
                     <Typography fontWeight={500}>{item.title}</Typography>
                   </TableCell>
                   <TableCell>{item.ingredients}</TableCell>
                   <TableCell>{item.price}</TableCell>
-                  <TableCell>{item.availability}</TableCell>
+                  <TableCell>{item.availability ?? "Available"}</TableCell>
                   <TableCell>
-                    <IconButton color="error">
+                    <IconButton color="error" onClick={() => handleDelete(item.id)}>
                       <Delete />
                     </IconButton>
                   </TableCell>
-                </motion.tr>
+                </TableRow>
               ))}
             </TableBody>
           </Table>

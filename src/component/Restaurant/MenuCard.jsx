@@ -1,90 +1,43 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React, { useState } from 'react'
-import categorizeIngredients from '../util/categrizeIngredients';
-import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../State/Cart/Action';
+import React, { useState } from 'react';
 
+const MenuCard = ({ item }) => {
+  const [expanded, setExpanded] = useState(false);
 
+  const handleAddToCart = () => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    localStorage.setItem("cart", JSON.stringify([...existingCart, item]));
+    alert(`${item.name} added to cart`);
+  };
 
-const MenuCard = ({item}) => {
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const dispatch=useDispatch();
-    const handleCheckBoxChange=(itemName)=>{
-        console.log("value");
-        if(selectedIngredients.includes(itemName)){
-          setSelectedIngredients(selectedIngredients.filter((item)=>item!==itemName))
-      } else {
-          setSelectedIngredients([...selectedIngredients,itemName])
-      }
-  
-    };
-    const handleAddItemToCart=(e)=>{
-      e.prevenDefault();
-      const reqData={
-        token:localStorage.getItem("jwt"),
-        cartItem:{
-        menuItemId:item.id,
-        quantity:1,
-        ingredients:selectedIngredients,
-      }
-    }
-      dispatch(addItemToCart(reqData));
-      console.log("reqData",reqData);
-    }
-
-
-    
-        
   return (
-    <Accordion>
-    <AccordionSummary
-          expandIcon={<ExpandMoreIcon/>}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <div className='lg:flex items-center justify-between'>
-            <div className="lg:flex items-center lg:gap-5" >
-                <img className='w-[7rem] h-[7rem] object-cover'
-                 src={item.images[0]}
-                 alt="" />
-                 <div className="space-y-1 lg:space-y-5 lg:max-w-2xl">
-                    <p className="font-semibond text-xl">{item.name}</p>
-                    <p>{item.price}</p>
-                    <p className="text-gray-400">
-                        {item.description}
-                    </p>
-                 </div>
-            </div>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
+    <div
+      className="p-4 border rounded shadow hover:shadow-lg transition cursor-pointer"
+      onClick={() => setExpanded(!expanded)}
+    >
+      <h3 className="text-xl font-semibold">{item.name}</h3>
+      <p className="text-gray-500 text-sm">
+        {item.vegetarian ? 'Vegetarian' : 'Non-Vegetarian'}
+      </p>
+      {item.seasonal && (
+        <p className="text-blue-500 text-xs mt-1">Seasonal Special</p>
+      )}
 
-            
-          <form onSubmit={handleAddItemToCart}> 
-            <div className="flex gaps-5 flex-wrap">
-            {
-                Object.keys(categorizeIngredients(item.ingredients)).map((category)=>(
-                        <div>
-                    <p>{category}</p>
-            <FormGroup>
-             {categorizeIngredients(item.ingredients)[category].map((item)=> ( 
-             <FormControlLabel key={item.id} control={<Checkbox onChange={()=>handleCheckBoxChange(item.name)} />}
-              label={item.name} />
-            ))}
-    
-            </FormGroup>  
-            </div> 
-  ))}
-            
-             </div>
-             <div className="pt-5">
-                <Button variant="contained" disabled={false} type="submit">{true?"Add to Cart":"Out of Stock"}</Button>
-             </div>
-          </form>
-        </AccordionDetails>
-      </Accordion>
+      {expanded && (
+        <div className="mt-3">
+          <p className="text-sm text-gray-600">Category: {item.category}</p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent collapsing the card when clicking button
+              handleAddToCart();
+            }}
+            className="mt-2 px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+          >
+            Add to Cart
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default MenuCard
+export default MenuCard;

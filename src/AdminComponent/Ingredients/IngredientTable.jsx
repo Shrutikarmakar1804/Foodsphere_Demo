@@ -36,7 +36,7 @@ const IngredientTable = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const orders = [1, 1, 1, 1, 1 ];
+  const orders = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // Sample data for orders
 
   return (
     <Box sx={{ px: 2, py: 4 }}>

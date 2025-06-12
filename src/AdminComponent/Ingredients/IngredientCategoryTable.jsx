@@ -4,7 +4,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import CreateIngredientCategoryForm from './CreateIngredientCatagoryForm';
 
 
-const orders=[1,1,1,1];
+const orders=[1,1,1,1,1,1,1,1,1,1]; // Sample data for orders
 const style = {
   position: 'absolute',
   top: '50%',
@@ -34,7 +34,7 @@ export default function IngredientCategoryTable() {
          <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow  sx= {{backgroundColor: '#f50057'}} >
             <TableCell align="left"> Id </TableCell>
             <TableCell align="left"> Name </TableCell>
           </TableRow>

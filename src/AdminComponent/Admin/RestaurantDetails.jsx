@@ -65,19 +65,27 @@ const RestaurantDetails = () => {
       transition={{ duration: 0.6 }}
       className="lg:px-20 px-5 pb-10"
     >
-      <Box sx={{ maxHeight: '80vh', overflowY: 'auto', pr: 2 }}>
-        <div className='py-5 flex justify-between items-center'>
-          <h3 className='text-3xl font-bold text-white'> {restaurantData.name} </h3>
+      <Box sx={{ maxHeight: '90vh', overflowY: 'auto', pr: 2 }}>
+        <div className="py-5 flex justify-between items-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide">
+            {restaurantData.name}
+          </h2>
           <div className="flex gap-3">
-            <Button variant="contained" color={restaurantData.status ? 'primary' : 'error'} onClick={handleStatusToggle}>
+            <Button
+              variant="contained"
+              color={restaurantData.status ? 'primary' : 'error'}
+              onClick={handleStatusToggle}
+            >
               {restaurantData.status ? 'Close' : 'Open'}
             </Button>
-            <Button variant="outlined" color="secondary" onClick={handleModalToggle}>Edit</Button>
+            <Button variant="outlined" color="secondary" onClick={handleModalToggle}>
+              Edit
+            </Button>
           </div>
         </div>
 
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 8 }} md={4}>
+        <Grid container spacing={5}>
+          <Grid size={{xs:8}} md={4}>
             <Card>
               <CardHeader title={<span className="text-gray-300">Restaurant Info</span>} />
               <CardContent className="space-y-4 text-gray-200">
@@ -92,28 +100,20 @@ const RestaurantDetails = () => {
             </Card>
           </Grid>
 
-          <Grid size={{ xs: 4 }}>
+          <Grid size={{xs:4}} md={4}>
             <Card>
               <CardHeader title={<span className="text-gray-300">Status Info</span>} />
               <CardContent className="space-y-4 text-gray-200">
-                <p><strong>Status:</strong> <span className={`px-3 py-1 rounded-full ${restaurantData.status ? 'bg-green-400 text-black' : 'bg-red-400 text-black'}`}>{restaurantData.status ? 'Open' : 'Closed'}</span></p>
+                <p><strong>Status:</strong>{' '}
+                  <span className={`px-5 py-2 rounded-full ${restaurantData.status ? 'bg-green-400 text-black' : 'bg-red-400 text-black'}`}>
+                    {restaurantData.status ? 'Open' : 'Closed'}
+                  </span>
+                </p>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid size= {{ xs: 6 }}>
-            <Card>
-              <CardHeader title={<span className="text-gray-300">Address</span>} />
-              <CardContent className="space-y-4 text-gray-200">
-                <p><strong>Country:</strong> {restaurantData.country}</p>
-                <p><strong>City:</strong> {restaurantData.city}</p>
-                <p><strong>Postal Code:</strong> {restaurantData.postalCode}</p>
-                <p><strong>Street Address:</strong> {restaurantData.street}</p>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
+          <Grid size={{xs:12}} md={4}>
             <Card>
               <CardHeader title={<span className="text-gray-300">Contact Info</span>} />
               <CardContent className="space-y-4 text-gray-200">
@@ -121,10 +121,18 @@ const RestaurantDetails = () => {
                 <p><strong>Phone:</strong> {restaurantData.phone}</p>
                 <div className="flex items-center gap-4">
                   <strong>Social:</strong>
-                  <FacebookIcon sx={{ fontSize: '2rem' }} />
-                  <InstagramIcon sx={{ fontSize: '2rem' }} />
-                  <XIcon sx={{ fontSize: '2rem' }} />
-                  <LinkedInIcon sx={{ fontSize: '2rem' }} />
+                  <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                    <FacebookIcon sx={{ fontSize: '2rem', color: '#3b5998' }} />
+                  </a>
+                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                    <InstagramIcon sx={{ fontSize: '2rem', color: '#E1306C' }} />
+                  </a>
+                  <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                    <XIcon sx={{ fontSize: '2rem' }} />
+                  </a>
+                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                    <LinkedInIcon sx={{ fontSize: '2rem', color: '#0A66C2' }} />
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -149,7 +157,7 @@ const RestaurantDetails = () => {
                 { label: 'Email', name: 'email' },
                 { label: 'Phone', name: 'phone' }
               ].map((field) => (
-                <Grid size={{ xs: 12}} key={field.name}>
+                <Grid size={{xs:12}} key={field.name}>
                   <TextField
                     label={field.label}
                     name={field.name}
@@ -160,7 +168,7 @@ const RestaurantDetails = () => {
                   />
                 </Grid>
               ))}
-              <Grid item xs={12}>
+              <Grid size={{xs:12}}>
                 <Button variant="contained" color="primary" onClick={handleModalToggle}>Save</Button>
               </Grid>
             </Grid>

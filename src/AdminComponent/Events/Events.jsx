@@ -35,7 +35,7 @@ const initialValues = {
   endsAt: null,
 };
 
-export const Events = () => {
+const Events = () => {
   const [open, setOpen] = useState(false);
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -118,3 +118,5 @@ export const Events = () => {
     </div>
   );
 };
+
+export default Events;

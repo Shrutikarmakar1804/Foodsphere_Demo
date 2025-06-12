@@ -1,3 +1,4 @@
+// Notification.js
 import React, { useEffect, useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -12,12 +13,7 @@ const iconMap = {
   warning: <WarningIcon fontSize="inherit" />,
 };
 
-const Notification = ({
-  message,
-  duration = 3000,
-  onClose,
-  type = "info", // success, error, info, warning
-}) => {
+const Notification = ({ message, duration = 3000, onClose, type = "info" }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 // src/pages/PaymentPage.jsx
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box, Card, Divider, FormControlLabel,
@@ -13,44 +13,57 @@ export default function PaymentPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ Check login status and restrict if not logged in
-  useEffect(() => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const [recurring, setRecurring] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  if (!isLoggedIn) {
-    alert("You must be logged in to access the payment page.");
-    navigate("/login");
-  }
-}, [navigate]);
-useEffect(() => {
-    if (!isLoggedIn) {
-      alert("No order details found. Please add items to your cart.");
-      navigate("/payment");
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const incomingTotal = location.state?.total;
+    const savedTotal = localStorage.getItem("orderTotal");
+    const alreadyAlerted = sessionStorage.getItem("alreadyAlertedPayment");
+
+    // 1. Not logged in
+    if (!isLoggedIn && !alreadyAlerted) {
+      if (incomingTotal) {
+        localStorage.setItem("orderTotal", incomingTotal); // save order
+      }
+      alert("You must be logged in to access the payment page.");
+      sessionStorage.setItem("alreadyAlertedPayment", "true");
+      navigate("/"); // go to home
+      return;
     }
+
+    // 2. Logged in but no cart data
+    if (isLoggedIn && !incomingTotal && !savedTotal) {
+      alert("No order details found. Please add items to your cart.");
+      navigate("/");
+      return;
+    }
+
+    // 3. Logged in + valid order
+    if (incomingTotal) {
+      localStorage.setItem("orderTotal", incomingTotal); // fresh save
+    }
+
+    setIsAuthorized(true);
   }, [location.state, navigate]);
 
-  // useEffect(() => {
-  //   if (location.state === null || location.state === undefined) {
-  //     alert("No order details found. Please add items to your cart.");
-  //     navigate("/cart");
-  //   }
-  // }, [location.state, navigate]);
-
-
-  const totalAmount = location.state?.total || 0;
-  const [recurring, setRecurring] = React.useState(false);
-  const [selectedMethod, setSelectedMethod] = React.useState(null);
+  const totalAmount = parseFloat(location.state?.total || localStorage.getItem("orderTotal") || 0);
 
   const handleConfirmOrder = () => {
+    localStorage.removeItem("orderTotal");
     setTimeout(() => {
       navigate("/payment-success");
     }, 1000);
   };
 
+  if (!isAuthorized) return null;
+
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", justifyContent: "center", p: 4 }}>
       <Card sx={{ width: "100%", maxWidth: 1100, display: "flex", p: 4 }}>
-        {/* Payment Method Selection */}
+        {/* Payment Method Section */}
         <Box flex={2} pr={4}>
           <Typography variant="h3" mb={2}>Payment Method</Typography>
 
@@ -77,7 +90,7 @@ useEffect(() => {
             ))}
           </Box>
 
-          {/* Card Input Fields */}
+          {/* Card Details */}
           <TextField label="Cardholder Name" fullWidth size="small" sx={{ mb: 2 }} />
           <TextField label="Card Number" fullWidth size="small" sx={{ mb: 2 }} />
           <Box display="flex" gap={2} mb={2}>
@@ -85,14 +98,12 @@ useEffect(() => {
             <TextField label="CCV" size="small" fullWidth />
           </Box>
 
-          {/* Info Text */}
           <Typography variant="body2" color="text.secondary" mb={2}>
             <InfoOutlined fontSize="small" sx={{ verticalAlign: "middle" }} /> Credit Card payments may take up to 24h to be processed
           </Typography>
 
           <FormControlLabel control={<Checkbox />} label="Save my payment details for future purchases" sx={{ mb: 2 }} />
 
-          {/* Recurring Payments */}
           <Divider sx={{ my: 3 }} />
           <Typography variant="subtitle2" mb={1}>
             Enable recurring payments{" "}
@@ -107,7 +118,7 @@ useEffect(() => {
           />
         </Box>
 
-        {/* Order Summary Section */}
+        {/* Order Summary */}
         <Box flex={1} sx={{ borderRadius: 3, p: 3, height: "fit-content" }}>
           <Typography variant="h6" mb={3}>Order Summary</Typography>
 
@@ -128,7 +139,6 @@ useEffect(() => {
             <Typography fontWeight="bold">₹{(totalAmount * 1.21).toFixed(2)}</Typography>
           </Box>
 
-          {/* Confirm Button */}
           <button
             onClick={handleConfirmOrder}
             className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700"

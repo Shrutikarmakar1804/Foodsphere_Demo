@@ -61,4 +61,14 @@ export const topMeals=[
         image:"https://images.pexels.com/photos/544961/pexels-photo-544961.jpeg?auto=compress&cs=tinysrgb&w=600",
         title:"Drinks"
     },
+
+    {
+        image:"https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        title:"Salads"
+    },
+
+    {
+        image:"https://images.pexels.com/photos/5848495/pexels-photo-5848495.jpeg",
+        title:"chinese"
+    }
 ]

@@ -35,15 +35,15 @@ function UserProfile() {
   ];
 
   return (
-    <div className="min-h-screen bg-black flex">
-      {/* Sidebar */}
-      <div className="w-64 bg-gray-100 p-6">
+    <div className="min-h-screen bg-black flex overflow-hidden">
+      {/* Sidebar (Sticky) */}
+      <div className="w-64 bg-gray-100 p-4 sticky top-0 h-screen overflow-y-auto">
         <div className="space-y-2">
           {menuItems.map((item) => (
             <div
               key={item.title}
               onClick={() => item.action ? item.action() : navigate(item.path)}
-              className={`flex items-center space-x-3 px-4 py-2 rounded cursor-pointer ${
+              className={`flex items-center space-x-3 px-5 py-4 rounded cursor-pointer ${
                 location.pathname.includes(item.path)
                   ? "bg-white text-black font-semibold"
                   : "text-gray-800 hover:bg-white"
@@ -56,8 +56,8 @@ function UserProfile() {
         </div>
       </div>
 
-      {/* Main content area */}
-      <div className="flex-1 bg-black p-6 overflow-y-auto">
+      {/* Main Content (Scrollable) */}
+      <div className="flex-1 p-6 overflow-y-auto h-screen">
         <Outlet />
       </div>
     </div>

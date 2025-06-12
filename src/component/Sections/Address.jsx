@@ -11,14 +11,13 @@ import {
   Alert,
 } from '@mui/material';
 import { AddLocation } from '@mui/icons-material';
-import AddressCard from '../Cart/AddressCard';
+import AddressCard from '../Cart/AddressCard'; // Reusable card component
 
-const Address = ({ userEmail }) => {
+const Address = ({ userEmail = "demo@example.com" }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', street: '', city: '', zip: '' });
   const [addresses, setAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
-
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const showSnackbar = (message, severity = 'success') => {
@@ -29,25 +28,19 @@ const Address = ({ userEmail }) => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
-  // Load addresses from localStorage when userEmail is available
   useEffect(() => {
-    if (!userEmail) return;
-    const key = `addresses_${userEmail}`;
-    const stored = localStorage.getItem(key);
+    const stored = localStorage.getItem(`addresses_${userEmail}`);
     if (stored) {
       try {
         setAddresses(JSON.parse(stored));
-      } catch (e) {
-        console.error('Failed to parse addresses from localStorage', e);
+      } catch (err) {
+        console.error('Error reading addresses:', err);
       }
     }
   }, [userEmail]);
 
-  // Save to localStorage when addresses change
   useEffect(() => {
-    if (!userEmail) return;
-    const key = `addresses_${userEmail}`;
-    localStorage.setItem(key, JSON.stringify(addresses));
+    localStorage.setItem(`addresses_${userEmail}`, JSON.stringify(addresses));
   }, [addresses, userEmail]);
 
   const handleOpen = () => setOpen(true);
@@ -64,9 +57,9 @@ const Address = ({ userEmail }) => {
   };
 
   const handleSubmit = () => {
-    if (!formData.name || !formData.street || !formData.city || !formData.zip) {
-      showSnackbar('Please fill all fields', 'error');
-      return;
+    const { name, street, city, zip } = formData;
+    if (!name || !street || !city || !zip) {
+      return showSnackbar('Please fill all fields', 'error');
     }
 
     if (editIndex !== null) {
@@ -95,32 +88,31 @@ const Address = ({ userEmail }) => {
     showSnackbar('Address deleted!', 'info');
   };
 
-  const createOrderUsingSelectedAddress = (address) => {
-    console.log('Selected Address for order:', address);
-    showSnackbar('Address selected!', 'success');
+  const handleSelectAddress = (address) => {
+    showSnackbar(`Selected address: ${address.name}`, 'success');
   };
 
   return (
-    <section className="lg:w flex justify-center px-5 pb-10 lg:pb-0">
+    <section className="flex justify-center px-5 pb-10">
       <div>
-        <h1 className="text-center font-semibold text-2xl py-10">Choose Delivery Address</h1>
+        <h1 className="text-center font-semibold text-2xl py-10">Choose Delivery Address </h1>
 
         <div className="flex gap-5 flex-wrap justify-center">
           {addresses.map((address, index) => (
             <AddressCard
               key={index}
               item={address}
-              handleSelectAddress={() => createOrderUsingSelectedAddress(address)}
+              handleSelectAddress={() => handleSelectAddress(address)}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
               showButton={true}
             />
           ))}
 
-          <Card className="flex flex-col items-center gap-5 w-70 p-5">
-            <AddLocation />
+          <Card className="flex flex-col items-center gap-5 w-72 p-5 bg-white shadow-md">
+            <AddLocation fontSize="large" />
             <div className="space-y-3 text-gray-500 w-full">
-              <h1 className="font-semibold text-lg text-white">Add New Address</h1>
+              <h1 className="font-semibold text-lg text-gray-700">Add New Address</h1>
               <Button variant="outlined" fullWidth onClick={handleOpen}>
                 Add
               </Button>
@@ -128,7 +120,7 @@ const Address = ({ userEmail }) => {
           </Card>
         </div>
 
-        {/* Modal */}
+        {/* Dialog */}
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{editIndex !== null ? 'Edit Address' : 'Add New Address'}</DialogTitle>
           <DialogContent>
