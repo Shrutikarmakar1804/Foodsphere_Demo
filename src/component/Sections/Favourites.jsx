@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, ratingClasses } from "@mui/material";
 import RestaurantCard from "../Restaurant/RestaurantCard";
 import { motion } from "framer-motion";
 
@@ -115,7 +115,7 @@ const demoFavorites = [
     name: "Curry Corner",
     images:["https://images.pexels.com/photos/28125427/pexels-photo-28125427/free-photo-of-naan-roti-tarkari-everest-tandoori-kitchen.jpeg?auto=compress&cs=tinysrgb&w=600"],
     cuisine: "Indian",
-    rating: 4.5,
+    rating: "4.5",
     address: "35 Curry Lane, Spice Town",
   },
   {

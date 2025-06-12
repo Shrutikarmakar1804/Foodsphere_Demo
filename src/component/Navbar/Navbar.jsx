@@ -69,12 +69,12 @@ const Navbar = () => {
                  Search
                 </span>
                 </Link>
-                <Link to="/about" className={getLinkClass("/about")}>
+                {/* <Link to="/about" className={getLinkClass("/about")}>
                   <span className="flex items-center gap-2">
                     <SiGitconnected />
                     SphereConnect
                   </span>
-                </Link>
+                </Link> */}
                 <Link to="/offers" className={getLinkClass("/offers")}>
                 <span className="flex items-center gap-2">
                 <BiSolidOffer />

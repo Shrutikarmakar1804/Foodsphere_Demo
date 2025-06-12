@@ -29,23 +29,27 @@ const Cart = () => {
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const deliveryFee = subtotal > 0 ? 40 : 0;
   const total = subtotal + deliveryFee;
-const handleProceedToPay = () => {
+
+  const handleProceedToPay = () => {
+  // Re-check login status from localStorage
+  const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+  setIsLoggedIn(loggedIn);
+
   if (subtotal === 0) {
     alert("Your cart is empty. Please add items before proceeding to checkout.");
     return;
   }
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-  if (!isLoggedIn) {
-    alert("Please log in or register to proceed to checkout.");
-    navigate("/login");
-    return;
-  }
+  // if (!loggedIn) {
+  //   alert("Please log in or register to proceed to checkout.");
+  //   navigate("/login");
+  //   return;
+  // }
 
   localStorage.setItem("orderTotal", total);
   navigate("/payment", { state: { total } });
 };
+
 
   return (
     <Box p={4}>
