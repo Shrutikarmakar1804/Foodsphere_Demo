@@ -1,33 +1,13 @@
+// FoodCategoryTable.jsx
 import {
-  Avatar,
-  Box,
-  Card,
-  CardHeader,
-  IconButton,
-  Modal,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Avatar, Box, Card, CardHeader, IconButton, Modal,
+  Paper, Table, TableBody, TableCell, TableContainer,
+  TableHead, TableRow
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import CreateIcon from '@mui/icons-material/Create';
 import CreateFoodCategoryForm from './CreateFoodCategoryForm';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const foodCategories = [
-  { id: "FOOD01", name: 'Biryani' },
-  { id: "FOOD02", name: 'Fried Chicken Wings' },
-  { id: "FOOD03", name: 'Chicken Sausage Pizza' },
-  { id: "FOOD03", name: 'Coca-Cola' },
-  { id: "FOOD03", name: 'Pepsi' },
-  { id: "FOOD03", name: 'Butter Panner Masala' },
-  { id: "FOOD03", name: 'Chocolate "Cake' },
-  { id: "FOOD03", name: 'Mango Mouse' }
-];
 
 const modalStyle = {
   position: 'absolute',
@@ -38,19 +18,33 @@ const modalStyle = {
 };
 
 export default function FoodCategoryTable() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [foodCategories, setFoodCategories] = useState([
+    { id: "FOOD01", name: 'Biryani' },
+    { id: "FOOD02", name: 'Fried Chicken Wings' },
+    { id: "FOOD03", name: 'Chicken Sausage Pizza' },
+    { id: "FOOD04", name: 'Coca-Cola' },
+    { id: "FOOD05", name: 'Pepsi' },
+    { id: "FOOD06", name: 'Butter Panner Masala' },
+    { id: "FOOD07", name: 'Chocolate Cake' },
+    { id: "FOOD08", name: 'Mango Mouse' }
+  ]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleAddCategory = (newCategory) => {
+    const newId = `FOOD${(foodCategories.length + 1).toString().padStart(2, '0')}`;
+    setFoodCategories([...foodCategories, { id: newId, name: newCategory.name }]);
+    handleClose();
+  };
+
   return (
     <Box className="bg-gray-900 min-h-screen text-white">
-      {/* Gradient Header */}
       <header className="bg-[#f50057] p-6 flex items-center justify-between">
         <h1 className="text-lg font-bold uppercase tracking-wider">Products</h1>
       </header>
 
-      {/* Main Content */}
       <main className="p-6">
         <Card className="bg-gray-800 text-white shadow-lg rounded-xl overflow-hidden">
           <CardHeader
@@ -108,7 +102,7 @@ export default function FoodCategoryTable() {
                 transition={{ duration: 0.25 }}
                 className="bg-gray-900 text-white p-6 rounded-xl shadow-2xl w-[90vw] max-w-md"
               >
-                <CreateFoodCategoryForm />
+                <CreateFoodCategoryForm onCreate={handleAddCategory} />
               </motion.div>
             )}
           </AnimatePresence>

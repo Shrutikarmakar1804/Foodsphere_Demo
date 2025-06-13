@@ -1,8 +1,9 @@
+// CreateFoodCategoryForm.jsx
 import { Button, TextField, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const CreateFoodCategoryForm = () => {
+const CreateFoodCategoryForm = ({ onCreate }) => {
   const [formData, setFormData] = useState({
     categoryName: '',
     restaurantId: '',
@@ -11,14 +12,17 @@ const CreateFoodCategoryForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
+    const newCategory = {
       name: formData.categoryName,
-      restaurantId: {
-        id: parseInt(formData.restaurantId, 10),
-      },
+      restaurantId: parseInt(formData.restaurantId, 10),
     };
 
-    console.log(data);
+    if (onCreate) {
+      onCreate(newCategory);
+    }
+
+    // Optionally reset the form
+    setFormData({ categoryName: '', restaurantId: '' });
   };
 
   const handleInputChange = (e) => {
@@ -41,42 +45,34 @@ const CreateFoodCategoryForm = () => {
           Create Food Category
         </h3>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <TextField
-              fullWidth
-              label="Food Category Name"
-              id="categoryName"
-              name="categoryName"
-              variant="outlined"
-              onChange={handleInputChange}
-              value={formData.categoryName}
-              InputLabelProps={{ style: { color: '#ccc' } }}
-              InputProps={{ style: { color: '#fff' } }}
-            />
-          </div>
-          <div>
-            <TextField
-              fullWidth
-              label="Restaurant ID"
-              id="restaurantId"
-              name="restaurantId"
-              variant="outlined"
-              onChange={handleInputChange}
-              value={formData.restaurantId}
-              InputLabelProps={{ style: { color: '#ccc' } }}
-              InputProps={{ style: { color: '#fff' } }}
-            />
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              className="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold"
-            >
-              Create Category
-            </Button>
-          </div>
+          <TextField
+            fullWidth
+            label="Food Category Name"
+            name="categoryName"
+            variant="outlined"
+            onChange={handleInputChange}
+            value={formData.categoryName}
+            InputLabelProps={{ style: { color: '#ccc' } }}
+            InputProps={{ style: { color: '#fff' } }}
+          />
+          <TextField
+            fullWidth
+            label="Restaurant ID"
+            name="restaurantId"
+            variant="outlined"
+            onChange={handleInputChange}
+            value={formData.restaurantId}
+            InputLabelProps={{ style: { color: '#ccc' } }}
+            InputProps={{ style: { color: '#fff' } }}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            fullWidth
+            className="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold"
+          >
+            Create Category
+          </Button>
         </form>
       </Paper>
     </motion.div>

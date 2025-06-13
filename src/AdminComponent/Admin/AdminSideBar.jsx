@@ -1,4 +1,5 @@
-import {Dashboard,
+import {
+  Dashboard as DashboardIcon,
   ShoppingBag,
   ShopTwo as ShopTwoIcon,
   Category as CategoryIcon,
@@ -17,14 +18,15 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../component/State/Authentication/Action';
 
 const menu = [
-  { title: "Dashboard", icon: <Dashboard />, path: "/" },
-  { title: "Orders", icon: <ShoppingBag />, path: "/orders" },
-  { title: "Menu", icon: <ShopTwoIcon />, path: "/menu" },
-  { title: "Food Category", icon: <CategoryIcon />, path: "/category" },
-  { title: "Ingredients", icon: <FastfoodIcon />, path: "/ingredients" },
-  { title: "Events", icon: <EventIcon />, path: "/event" },
-  { title: "Details", icon: <AdminPanelSettingsIcon />, path: "/details" },
-  { title: "Logout", icon: <LogoutIcon />, path: "/" }
+  { title: "Dashboard", icon: <DashboardIcon />, path: "dashboard" },
+  { title: "Orders", icon: <ShoppingBag />, path: "orders" },
+  { title: "Menu", icon: <ShopTwoIcon />, path: "menu" },
+  { title: "Food Category", icon: <CategoryIcon />, path: "food-category" },
+  { title: "Ingredients", icon: <FastfoodIcon />, path: "ingredients" },
+  { title: "Events", icon: <EventIcon />, path: "events" },
+  { title: "Details", icon: <AdminPanelSettingsIcon />, path: "details" },
+  { title: "Logout", icon: <LogoutIcon />, path: "logout" },
+  
 ];
 
 export const AdminSideBar = ({ open, handleClose }) => {
@@ -37,7 +39,7 @@ export const AdminSideBar = ({ open, handleClose }) => {
       dispatch(logout());
       navigate("/");
     } else {
-      navigate(`/admin/restaurants${item.path}`);
+      navigate(`/admin/${item.path}`);
     }
     handleClose();
   };

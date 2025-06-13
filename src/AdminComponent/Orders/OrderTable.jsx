@@ -12,8 +12,7 @@ import {
   TableRow,
   Avatar,
   Typography,
-  Chip,
-  Button
+  Chip
 } from '@mui/material';
 import { IoFastFoodSharp } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
@@ -108,18 +107,6 @@ export default function OrderTable({ filter = "All" }) {
               <IoFastFoodSharp />
             </Avatar>
           }
-          action={
-            <Box textAlign="right">
-              <Button
-                variant="contained"
-                size="small"
-                sx={{ mt: 1 }}
-                onClick={() => navigate("admin/orders/create")}
-              >
-                + Manage Orders
-              </Button>
-            </Box>
-          }
           title={<Typography variant="h6">All Orders</Typography>}
           sx={{ pt: 2, pb: 2 }}
         />
@@ -138,26 +125,34 @@ export default function OrderTable({ filter = "All" }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredOrders.map((row) => (
-                <TableRow
-                  key={row.id}
-                  hover
-                  sx={{ cursor: 'pointer' }}
-                  onClick={() => navigate(`/orders/${row.id}`)}
-                >
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>
-                    <Avatar src={row.image} alt={row.name} variant="rounded" />
-                  </TableCell>
-                  <TableCell>{row.customerEmail}</TableCell>
-                  <TableCell>{row.price}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.ingredients}</TableCell>
-                  <TableCell>
-                    <Chip label={row.status} color={getStatusColor(row.status)} />
+              {filteredOrders.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={7} align="center">
+                    No orders found for selected status.
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                filteredOrders.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    hover
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => navigate(`/orders/${row.id}`)}
+                  >
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>
+                      <Avatar src={row.image} alt={row.name} variant="rounded" />
+                    </TableCell>
+                    <TableCell>{row.customerEmail}</TableCell>
+                    <TableCell>{row.price}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.ingredients || '-'}</TableCell>
+                    <TableCell>
+                      <Chip label={row.status} color={getStatusColor(row.status)} />
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </TableContainer>

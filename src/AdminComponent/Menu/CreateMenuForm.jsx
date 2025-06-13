@@ -1,24 +1,15 @@
-import { AddPhotoAlternate } from '@mui/icons-material';
+// CreateMenuForm.js
 import {
-  Box,
-  Button,
-  Chip,
-  CircularProgress,
-  FormControl,
-  Grid,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField,
-  ThemeProvider,
-  createTheme,
+  Box, Button, Chip, CircularProgress, FormControl, Grid, IconButton,
+  InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider,
+  createTheme
 } from '@mui/material';
+import { AddPhotoAlternate } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { uploadImageToCloudinary } from '../util/UploadToCloudinary';
+import { useNavigate } from 'react-router-dom';
+import { uploadImageToCloudinary } from '../util/UploadToCloudinary'; // Use mock if needed
 import { motion } from 'framer-motion';
 
 const initialValues = {
@@ -49,12 +40,25 @@ const darkTheme = createTheme({
 
 const CreateMenuForm = () => {
   const [uploadImage, setUploadImage] = useState(false);
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      values.restaurantId = 2;
-      console.log('data ---', values);
-    },
+      const newMenu = {
+        id: Date.now(),
+        image: values.images[0] || '',
+        title: values.name,
+        ingredients: values.ingredients.join(', '),
+        price: `₹${values.price}`,
+        availability: 'Available'
+      };
+
+      const existingMenus = JSON.parse(localStorage.getItem("menus")) || [];
+      const updatedMenus = [...existingMenus, newMenu];
+      localStorage.setItem("menus", JSON.stringify(updatedMenus));
+      navigate("/admin/menu");
+    }
   });
 
   const handleImageChange = async (e) => {
@@ -83,15 +87,9 @@ const CreateMenuForm = () => {
           <h1 className="font-bold text-3xl text-center py-4">Add New Menu</h1>
           <form onSubmit={formik.handleSubmit} className="space-y-5">
             <Grid container spacing={4}>
-              <Grid size={{ xs:12 }} className="flex flex-wrap gap-3">
-                <input
-                  accept="image/*"
-                  id="fileinput"
-                  style={{ display: 'none' }}
-                  onChange={handleImageChange}
-                  type="file"
-                />
-                <label className="relative" htmlFor="fileinput">
+              <Grid size={{xs:12}} className="flex flex-wrap gap-3">
+                <input accept="image/*" id="fileinput" style={{ display: 'none' }} onChange={handleImageChange} type="file" />
+                <label htmlFor="fileinput">
                   <span className="w-24 h-24 cursor-pointer flex items-center justify-center p-3 border rounded-md border-gray-600 bg-gray-700">
                     <AddPhotoAlternate className="text-white" />
                   </span>
@@ -107,7 +105,7 @@ const CreateMenuForm = () => {
                       <img className="w-24 h-24 object-cover rounded-md" src={image} alt="" />
                       <IconButton
                         size="small"
-                        sx={{ position: 'absolute', top: 0, right: 0, outline: 'none' }}
+                        sx={{ position: 'absolute', top: 0, right: 0 }}
                         onClick={() => handleRemoveImage(index)}
                       >
                         <CloseIcon sx={{ fontSize: '1rem', color: 'white' }} />
@@ -116,29 +114,49 @@ const CreateMenuForm = () => {
                   ))}
                 </div>
               </Grid>
-              <Grid size={{ xs:12 }}>
+              <Grid size={{xs:12}}>
                 <TextField fullWidth label="Name" id="name" name="name" onChange={formik.handleChange} value={formik.values.name} />
               </Grid>
-              <Grid size={{ xs:12 }}>
+              <Grid size={{xs:12}}>
                 <TextField fullWidth label="Description" id="description" name="description" onChange={formik.handleChange} value={formik.values.description} />
               </Grid>
-              <Grid size={{ xs:12 }}>
+              <Grid size={{xs:12}}>
                 <TextField fullWidth label="Price" id="price" name="price" onChange={formik.handleChange} value={formik.values.price} />
               </Grid>
-              <Grid size={{ xs:12 }}>
+              <Grid size={{xs:12}} className="flex flex-wrap gap-3">
                 <FormControl fullWidth>
                   <InputLabel>Category</InputLabel>
-                  <Select label="Food Category" name="category" value={formik.values.category} onChange={formik.handleChange}>
+                  <Select label="Category" name="category" value={formik.values.category} onChange={formik.handleChange}>
                     <MenuItem value={10}>Biryani</MenuItem>
                     <MenuItem value={20}>Pizza</MenuItem>
                     <MenuItem value={30}>KFC</MenuItem>
+                    <MenuItem value={40}>Burger</MenuItem>
+                    <MenuItem value={50}>Chinese</MenuItem>
+                    <MenuItem value={60}>Ice Cream</MenuItem>   
+                    <MenuItem value={70}>Drinks</MenuItem>
+                    <MenuItem value={80}>Snacks</MenuItem>
+                    <MenuItem value={90}>Salads</MenuItem>  
+                    <MenuItem value={100}>Desserts</MenuItem>
+                    <MenuItem value={110}>Sandwiches</MenuItem>
+                    <MenuItem value={120}>Wraps</MenuItem>
+                    <MenuItem value={130}>Soups</MenuItem>
+                    <MenuItem value={140}>Pasta</MenuItem>
+                    <MenuItem value={150}>Tacos</MenuItem>
+                    <MenuItem value={160}>Sushi</MenuItem>
+                    <MenuItem value={170}>Curry</MenuItem>
+                    <MenuItem value={180}>Salads</MenuItem>
+                    <MenuItem value={190}>Grilled Items</MenuItem>  
+                    <MenuItem value={200}>Breakfast</MenuItem>
+                    <MenuItem value={210}>Brunch</MenuItem>
+                    <MenuItem value={220}>Vegan</MenuItem>
+                    <MenuItem value={230}>Gluten-Free</MenuItem>
+                    <MenuItem value={240}>Seafood</MenuItem>
+                    <MenuItem value={250}>Steak</MenuItem>
+                    <MenuItem value={260}>Barbecue</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid size={{ xs:12 }}>
-                <TextField fullWidth label="RestaurantId" id="restaurantId" name="restaurantId" onChange={formik.handleChange} value={formik.values.restaurantId} />
-              </Grid>
-              <Grid size={{ xs:12 }}>
+              <Grid size={{xs:12}} className="flex flex-wrap gap-3">
                 <FormControl fullWidth>
                   <InputLabel>Ingredients</InputLabel>
                   <Select
@@ -155,29 +173,11 @@ const CreateMenuForm = () => {
                       </Box>
                     )}
                   >
-                    {["bread", "Sauce", "chicken"].map((name) => (
+                    {["Bread", "Sauce", "Chicken", "Lettuce", "Cheese", "Dough", "Patty", "Bread", "Sauce", "Chicken", "Lettuce", "Cheese", "Dough", "Patty" ].map((name) => (
                       <MenuItem key={name} value={name}>
                         {name}
                       </MenuItem>
                     ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid size={{ xs:12 }}>
-                <FormControl fullWidth>
-                  <InputLabel>Is Seasonal</InputLabel>
-                  <Select name="seasonal" value={formik.values.seasonal} onChange={formik.handleChange}>
-                    <MenuItem value={true}>Yes</MenuItem>
-                    <MenuItem value={false}>No</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid size={{ xs:12 }}>
-                <FormControl fullWidth>
-                  <InputLabel>Is Vegetarian</InputLabel>
-                  <Select name="vegetarian" value={formik.values.vegetarian} onChange={formik.handleChange}>
-                    <MenuItem value={true}>Yes</MenuItem>
-                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

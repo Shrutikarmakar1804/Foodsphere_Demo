@@ -1,36 +1,17 @@
-// import { Route, Routes } from 'react-router-dom'
-// import  CreateRestaurantForm  from '../../AdminComponent/CreateRestaurantForm/CreateRestaurantForm'
-// import Admin from '../../AdminComponent/Admin/Admin'
-
-
-// export const AdminRoute = () => {
-//   return (
-//     <div>
-//         <Routes>
-            
-//             <Route path= "/*" element={false?<CreateRestaurantForm/>:<Admin/>}>
-
-//             </Route>
-        
-//         </Routes>
-//     </div>
-//   )
-// }
-
-import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import CreateRestaurantForm from '../../AdminComponent/CreateRestaurantForm/CreateRestaurantForm';
 import Admin from '../../AdminComponent/Admin/Admin';
 
 const AdminRoute = () => {
-  const [restaurantCreated, setRestaurantCreated] = useState(false);
+  const restaurant = localStorage.getItem("restaurant");
 
   return (
     <Routes>
-      {!restaurantCreated ? (
+      {!restaurant ? (
         <Route
           path="*"
-          element={<CreateRestaurantForm onRestaurantCreate={() => setRestaurantCreated(true)} />}
+          element={<CreateRestaurantForm onRestaurantCreate={() => window.location.reload()} />}
         />
       ) : (
         <Route path="*" element={<Admin />} />

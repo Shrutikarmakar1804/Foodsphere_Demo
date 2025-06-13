@@ -1,3 +1,4 @@
+// MenuTable.js
 import {
   Box, Card, CardHeader, IconButton, Paper, Table,
   TableBody, TableCell, TableContainer, TableHead,
@@ -45,11 +46,12 @@ export default function MenuTable() {
       setMenus(savedMenus);
     } else {
       setMenus(defaultMenus);
+      localStorage.setItem("menus", JSON.stringify(defaultMenus));
     }
   }, []);
 
   const handleAddMenuClick = () => {
-    navigate("/admin/restaurants/add-menu");
+    navigate("/admin/add-menu");
   };
 
   const handleDelete = (id) => {
@@ -94,17 +96,15 @@ export default function MenuTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {menus.map((item, idx) => (
-                <TableRow key={idx}>
+              {menus.map((item) => (
+                <TableRow key={item.id}>
                   <TableCell>
                     <Avatar variant="rounded" src={item.image} alt={item.title} sx={{ width: 56, height: 56 }} />
                   </TableCell>
-                  <TableCell>
-                    <Typography fontWeight={500}>{item.title}</Typography>
-                  </TableCell>
+                  <TableCell><Typography fontWeight={500}>{item.title}</Typography></TableCell>
                   <TableCell>{item.ingredients}</TableCell>
                   <TableCell>{item.price}</TableCell>
-                  <TableCell>{item.availability ?? "Available"}</TableCell>
+                  <TableCell>{item.availability}</TableCell>
                   <TableCell>
                     <IconButton color="error" onClick={() => handleDelete(item.id)}>
                       <Delete />
