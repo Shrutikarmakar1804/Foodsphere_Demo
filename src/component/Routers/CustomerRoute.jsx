@@ -16,6 +16,7 @@ import Profile from "../Profile/Profile";
 import Cart from "../Cart/Cart";
 import DishDetailsPage from "../Page/DishDetailsPage";
 
+
 export const CustomerRoute = () => {
   const location = useLocation();
 
@@ -38,7 +39,9 @@ export const CustomerRoute = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/terms" element={<Terms/>} />
         <Route path="/my-profile/*" element={<Profile/>} />
-        <Route path="/dish/:id" element={<DishDetailsPage />} />
+     <Route path="/dish/:id" element={<DishDetailsPage />} />
+
+
         
         
       </Routes>
@@ -46,5 +49,4 @@ export const CustomerRoute = () => {
     </div>
   );
 };
-
 
