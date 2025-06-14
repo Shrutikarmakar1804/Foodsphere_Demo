@@ -225,7 +225,7 @@ const demoRestaurants = [
 
 const Home = () => {
   return (
-    <div className='pb-10'>
+    <div className=''>
       <section className='banner -z-50 relative flex flex-col justify-center items-center'>
         <div className='w-[80vw] z-10 text-center'>
           <p className='text-2xl lg:text-6xl font-bold z-10 py-5'>FoodSphere</p>
@@ -241,6 +241,7 @@ const Home = () => {
       </section>
 
       <TopDishes />
+
       <section className='px-5 lg:px-20 pt-10'>
         <h1 className='text-2xl font-semibold text-gray-400 pb-8'>Order From Our Handpicked Favourites</h1>
         <div className='flex flex-wrap items-center justify-around gap-5'>
@@ -249,7 +250,15 @@ const Home = () => {
           ))}
         </div>
       </section>
-          <Footer />
+      {/* <section className='px-5 lg:px-20 pt-10'>
+        <h1 className='text-2xl font-semibold text-gray-400 pb-8'>Explore More Restaurants</h1>
+        <div className='flex flex-wrap items-center justify-around gap-5'>
+          {demoRestaurants.map((item) => (
+            <RestaurantCard item={item} key={item.id} />
+          ))}
+        </div>
+      </section> */}
+          <Footer/>
     </div>
   );
 };
