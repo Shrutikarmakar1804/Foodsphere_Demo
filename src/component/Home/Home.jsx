@@ -223,6 +223,31 @@ const demoRestaurants = [
   }
 ];
 
+const explorerestaurants=[
+  {
+    id: "21",
+    name: "Sushi Spot",
+    description: "Fresh sushi and sashimi",
+    city: "delhi",
+    open: true,
+    categories: ["Sushi", "Sashimi", "Drinks"],
+    images: [
+      "https://images.pexels.com/photos/32500429/pexels-photo-32500429/free-photo-of-variety-of-appetizers-on-a-table-for-party.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ]
+  },
+  {
+    id: "22",
+    name: "Vegan Vibes",
+    description: "Plant-based meals and smoothies",
+    city: "bangalore",
+    open: true,
+    categories: ["Salads", "Smoothies", "Bowls"],
+    images: [
+      "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ]
+  }
+]
+
 const Home = () => {
   return (
     <div className=''>
@@ -250,14 +275,23 @@ const Home = () => {
           ))}
         </div>
       </section>
-      {/* <section className='px-5 lg:px-20 pt-10'>
+     
+      <section className='px-5 lg:px-20 pt-10'>
         <h1 className='text-2xl font-semibold text-gray-400 pb-8'>Explore More Restaurants</h1>
+        <div className='flex flex-wrap items-center justify-around gap-5'>
+          {explorerestaurants.map((item) => (
+            <RestaurantCard item={item} key={item.id} />
+          ))}
+        </div>
+      </section>
+      <section className='px-5 lg:px-20 pt-10'>
+        <h1 className='text-2xl font-semibold text-gray-400 pb-8'>Discover New Flavours</h1>
         <div className='flex flex-wrap items-center justify-around gap-5'>
           {demoRestaurants.map((item) => (
             <RestaurantCard item={item} key={item.id} />
           ))}
         </div>
-      </section> */}
+      </section>
           <Footer/>
     </div>
   );
