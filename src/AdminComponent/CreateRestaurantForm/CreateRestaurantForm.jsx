@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import {
+  Box,
   Grid,
   TextField,
   Button,
   IconButton,
+  Typography,
+  Divider,
   CircularProgress,
+  Paper,
+  Fade,
 } from '@mui/material';
-import { AddPhotoAlternate } from '@mui/icons-material';
+import { AddPhotoAlternate, Image, Info, Contacts } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const CreateRestaurantForm = ({ onRestaurantCreate }) => {
@@ -36,7 +41,7 @@ const CreateRestaurantForm = ({ onRestaurantCreate }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleImageChange = async (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -61,44 +66,102 @@ const CreateRestaurantForm = ({ onRestaurantCreate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Created Restaurant:', formData);
     localStorage.setItem('restaurant', JSON.stringify(formData));
     if (onRestaurantCreate) onRestaurantCreate(formData);
   };
 
   return (
-    <div className="py-20 px-10 min-h-screen">
-      <h2 className="text-2xl font-bold text-center mb-6">Add New Restaurant</h2>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} className="flex gap-2 flex-wrap">
-            <input
-              id="upload"
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleImageChange}
-            />
-            <label htmlFor="upload">
-              <span className="w-24 h-24 cursor-pointer flex items-center justify-center border border-gray-400 rounded">
-                <AddPhotoAlternate />
-              </span>
-            </label>
-            {uploading && <CircularProgress size={24} />}
-            {formData.images.map((img, idx) => (
-              <div className="relative" key={idx}>
-                <img src={img} alt="" className="w-24 h-24 object-cover" />
+    <Paper
+      elevation={4}
+      sx={{
+        p: 4,
+        maxWidth: '1100px',
+        margin: 'auto',
+        mt: 5,
+        borderRadius: 3,
+        background: (theme) =>
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(to right, #1e1e1e, #2c2c2c)'
+            : 'linear-gradient(to right, #ffffff, #f0f0f0)',
+      }}
+    >
+      <Box mb={3}>
+        <Typography variant="h4" fontWeight="bold" gutterBottom>
+          <Info sx={{ verticalAlign: 'middle', mr: 1 }} /> Restaurant Setup
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Fill in your restaurant details to get started.
+        </Typography>
+      </Box>
+
+      <Divider sx={{ mb: 3 }} />
+
+      {/* Image Upload Section */}
+      <Box mb={3}>
+        <Typography variant="h6" gutterBottom>
+          <Image sx={{ verticalAlign: 'middle', mr: 1 }} /> Upload Photos
+        </Typography>
+        <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" mb={1}>
+          <input id="upload" type="file" accept="image/*" hidden onChange={handleImageChange} />
+          <label htmlFor="upload">
+            <Box
+              sx={{
+                width: 96,
+                height: 96,
+                border: '2px dashed #888',
+                borderRadius: 2,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                backgroundColor: 'action.hover',
+              }}
+            >
+              <AddPhotoAlternate />
+            </Box>
+          </label>
+          {uploading && <CircularProgress size={24} />}
+          {formData.images.map((img, idx) => (
+            <Fade in key={idx}>
+              <Box sx={{ position: 'relative' }}>
+                <img
+                  src={img}
+                  alt={`uploaded-${idx}`}
+                  style={{
+                    width: 96,
+                    height: 96,
+                    objectFit: 'cover',
+                    borderRadius: 8,
+                    border: '1px solid #888',
+                  }}
+                />
                 <IconButton
                   size="small"
-                  sx={{ position: 'absolute', top: 0, right: 0 }}
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    color: 'white',
+                    '&:hover': { backgroundColor: 'rgba(0,0,0,0.8)' },
+                  }}
                   onClick={() => handleRemoveImage(idx)}
                 >
                   <CloseIcon fontSize="small" />
                 </IconButton>
-              </div>
-            ))}
-          </Grid>
+              </Box>
+            </Fade>
+          ))}
+        </Box>
+      </Box>
 
+      {/* Form Fields */}
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h6" gutterBottom>
+          <Contacts sx={{ verticalAlign: 'middle', mr: 1 }} /> Details
+        </Typography>
+
+        <Grid container spacing={2}>
           {[
             ['name', 'Restaurant Name'],
             ['description', 'Description'],
@@ -117,25 +180,42 @@ const CreateRestaurantForm = ({ onRestaurantCreate }) => {
             ['linkedIn', 'LinkedIn'],
             ['facebook', 'Facebook'],
           ].map(([name, label]) => (
-            <Grid item xs={12} sm={6} key={name}>
+            <Grid size={{xs:12}} sm={6} key={name}>
               <TextField
                 fullWidth
-                name={name}
                 label={label}
+                name={name}
                 value={formData[name]}
                 onChange={handleChange}
+                variant="filled"
               />
             </Grid>
           ))}
-
-          <Grid item xs={12} className="flex justify-center mt-4">
-            <Button type="submit" variant="contained" color="primary">
-              Create Restaurant
-            </Button>
-          </Grid>
         </Grid>
+
+        <Divider sx={{ my: 4 }} />
+
+        <Box textAlign="center" mt={2}>
+          <Button
+            variant="contained"
+            size="large"
+            type="submit"
+            sx={{
+              px: 5,
+              py: 1.5,
+              background: 'linear-gradient(to right, #4A00E0, #8E2DE2)',
+              color: '#fff',
+              fontWeight: 'bold',
+              '&:hover': {
+                background: 'linear-gradient(to right, #3b0088, #6d20c1)',
+              },
+            }}
+          >
+            Create Restaurant
+          </Button>
+        </Box>
       </form>
-    </div>
+    </Paper>
   );
 };
 

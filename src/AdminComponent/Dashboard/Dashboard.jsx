@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, PieChart, Pie, Cell, Legend
 } from 'recharts';
 
 const RestaurantDashboard = () => {
@@ -58,6 +59,32 @@ const RestaurantDashboard = () => {
     { day: "Sat", dineIn: 240, online: 200, takeaway: 160 },
     { day: "Sun", dineIn: 220, online: 170, takeaway: 150 },
   ];
+
+  const yearlyOrders = [
+    { year: "2019", orders: 3200 },
+    { year: "2020", orders: 4100 },
+    { year: "2021", orders: 5100 },
+    { year: "2022", orders: 6700 },
+    { year: "2023", orders: 8200 },
+    { year: "2024", orders: 7600 }
+  ];
+
+  const monthlyOrders = [
+    { name: 'Jan', value: 720 },
+    { name: 'Feb', value: 680 },
+    { name: 'Mar', value: 890 },
+    { name: 'Apr', value: 960 },
+    { name: 'May', value: 1040 },
+    { name: 'Jun', value: 990 },
+    { name: 'Jul', value: 870 },
+    { name: 'Aug', value: 940 },
+    { name: 'Sep', value: 880 },
+    { name: 'Oct', value: 920 },
+    { name: 'Nov', value: 970 },
+    { name: 'Dec', value: 1050 },
+  ];
+
+  const pieColors = ['#3b82f6', '#f97316', '#10b981', '#6366f1', '#ef4444', '#eab308', '#8b5cf6', '#14b8a6', '#f43f5e', '#22d3ee', '#a3e635', '#fb923c'];
 
   const handleSearch = () => {
     const query = searchQuery.trim().toLowerCase();
@@ -179,19 +206,70 @@ const RestaurantDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-         {/* Bar Chart */}
+        {/* Monthly Donut Chart */}
         <div className="bg-gray-800 p-6 rounded-xl shadow">
-          <h2 className="text-lg font-semibold mb-4">Weekly Order Distribution</h2>
+          <h2 className="text-lg font-semibold mb-4">Monthly Order Distribution</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={monthlyOrders}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={100}
+                paddingAngle={3}
+                label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+              >
+                {monthlyOrders.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={pieColors[index % pieColors.length]}
+                    stroke="#1f2937" // border color
+                    strokeWidth={2}
+                  />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1f2937",
+                  border: "1px solid #374151",
+                  borderRadius: 8,
+                  color: "#fff",
+                }}
+                formatter={(value, name) => [`${value} Orders`, name]}
+              />
+              <Legend
+                iconType="circle"
+                layout="horizontal"
+                verticalAlign="bottom"
+                align="center"
+                wrapperStyle={{
+                  color: '#cbd5e1',
+                  fontSize: 12,
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+
+        {/* Yearly Bar Chart */}
+        <div className="bg-gray-800 p-6 rounded-xl shadow">
+          <h2 className="text-lg font-semibold mb-4">Yearly Order Distribution</h2>
           <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={trendingItems.map(item => ({ day: item.name, orders: item.orders }))}>
+            <BarChart data={yearlyOrders}>
               <CartesianGrid stroke="#444" strokeDasharray="5 5" />
-              <XAxis dataKey="day" stroke="#ccc" />
+              <XAxis dataKey="year" stroke="#ccc" />
               <YAxis stroke="#ccc" />
               <Tooltip />
               <Bar dataKey="orders" fill="#34d399" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
+
+
 
         {/* Favorite Items */}
         <div className="bg-gray-800 p-4 rounded-xl shadow">
