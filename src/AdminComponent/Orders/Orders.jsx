@@ -36,7 +36,7 @@ const Orders = () => {
             onChange={handleFilter}
           >
             <FormControlLabel value="All" control={<Radio />} label="All" />
-            <FormControlLabel value="Pending" control={<Radio />} label="Pending" />
+            <FormControlLabel value="Preparing" control={<Radio />} label="Preparing" />
             <FormControlLabel value="Completed" control={<Radio />} label="Completed" />
             <FormControlLabel value="Cancelled" control={<Radio />} label="Cancelled" />
           </RadioGroup>

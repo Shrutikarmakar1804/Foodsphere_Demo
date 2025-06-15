@@ -1,21 +1,8 @@
  const DemoRestaurants = [
   {
     id: 1,
-    name: 'Spicy Hub',
-    description: 'Authentic Indian cuisine with a modern twist.',
+    name: 'Add Restaurant Order ',
     image: 'https://source.unsplash.com/featured/?indianfood'
-  },
-  {
-    id: 2,
-    name: 'Pasta Palace',
-    description: 'Delicious Italian pasta and more.',
-    image: 'https://source.unsplash.com/featured/?pasta'
-  },
-  {
-    id: 3,
-    name: 'Sushi Central',
-    description: 'Fresh sushi and sashimi with traditional Japanese flavors.',
-    image: 'https://source.unsplash.com/featured/?sushi'
   }
 ];
 

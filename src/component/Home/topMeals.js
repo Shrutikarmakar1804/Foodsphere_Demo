@@ -1,4 +1,4 @@
-export const topMeals=[
+ const topMeals=[
    
     {
         image:"https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -72,3 +72,4 @@ export const topMeals=[
         title:"chinese"
     }
 ]
+export default topMeals;

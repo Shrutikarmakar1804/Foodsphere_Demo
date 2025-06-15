@@ -24,7 +24,7 @@ const menu = [
   { title: "Menu", icon: <ShopTwoIcon />, path: "menu" },
   { title: "Food Category", icon: <CategoryIcon />, path: "food-category" },
   { title: "Ingredients", icon: <FastfoodIcon />, path: "ingredients" },
-  { title: "Add Food", icon: <AddCircleOutlineIcon />, path: "add-food" },
+  { title: "Add Food", icon: <AddCircleOutlineIcon />, path: "add-food/:id" },
   { title: "Events", icon: <EventIcon />, path: "events" },
   { title: "Details", icon: <AdminPanelSettingsIcon />, path: "details" },
   { title: "Logout", icon: <LogoutIcon />, path: "logout" },

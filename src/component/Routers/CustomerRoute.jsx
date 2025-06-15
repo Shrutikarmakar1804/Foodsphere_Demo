@@ -15,6 +15,8 @@ import Search from "../Navbar/Search";
 import Profile from "../Profile/Profile";
 import Cart from "../Cart/Cart";
 import DishDetailsPage from "../Page/DishDetailsPage";
+import FoodDetailsPage from "../Home/FoodDetailsPage";
+
 
 
 export const CustomerRoute = () => {
@@ -40,6 +42,8 @@ export const CustomerRoute = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/my-profile/*" element={<Profile />} />
         <Route path="/dish/:id" element={<DishDetailsPage />} />
+         <Route path="/food/:id" element={<FoodDetailsPage />} />
+          
 
 
 

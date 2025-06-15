@@ -20,15 +20,7 @@ const Cart = () => {
   const deliveryFee = subtotal > 0 ? 40 : 0;
   const total = subtotal + deliveryFee;
 
-  const handleProceedToPay = () => {
-    if (subtotal === 0) {
-      alert("Your cart is empty.");
-      navigate("/");
-      return;
-    }
-    localStorage.setItem("orderTotal", total);
-    navigate("/payment", { state: { total } });
-  };
+  // Removed duplicate and unused handleProceedToPay function
 
   // Promo code state
   const [promoCode, setPromoCode] = React.useState("");

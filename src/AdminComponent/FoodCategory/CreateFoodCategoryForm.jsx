@@ -1,5 +1,5 @@
 // CreateFoodCategoryForm.jsx
-import { Button, TextField, Paper } from '@mui/material';
+import { Button, TextField, Paper, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -7,30 +7,23 @@ const CreateFoodCategoryForm = ({ onCreate }) => {
   const [formData, setFormData] = useState({
     categoryName: '',
     restaurantId: '',
+    type: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const newCategory = {
       name: formData.categoryName,
       restaurantId: parseInt(formData.restaurantId, 10),
+      type: formData.type,
     };
-
-    if (onCreate) {
-      onCreate(newCategory);
-    }
-
-    // Optionally reset the form
-    setFormData({ categoryName: '', restaurantId: '' });
+    if (onCreate) onCreate(newCategory);
+    setFormData({ categoryName: '', restaurantId: '', type: '' });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   return (
@@ -50,8 +43,8 @@ const CreateFoodCategoryForm = ({ onCreate }) => {
             label="Food Category Name"
             name="categoryName"
             variant="outlined"
-            onChange={handleInputChange}
             value={formData.categoryName}
+            onChange={handleInputChange}
             InputLabelProps={{ style: { color: '#ccc' } }}
             InputProps={{ style: { color: '#fff' } }}
           />
@@ -60,11 +53,27 @@ const CreateFoodCategoryForm = ({ onCreate }) => {
             label="Restaurant ID"
             name="restaurantId"
             variant="outlined"
-            onChange={handleInputChange}
             value={formData.restaurantId}
+            onChange={handleInputChange}
             InputLabelProps={{ style: { color: '#ccc' } }}
             InputProps={{ style: { color: '#fff' } }}
           />
+          <TextField
+            fullWidth
+            select
+            label="Category Type"
+            name="type"
+            value={formData.type}
+            onChange={handleInputChange}
+            InputLabelProps={{ style: { color: '#ccc' } }}
+            InputProps={{ style: { color: '#fff' } }}
+          >
+            {['Main Course', 'Starter', 'Dessert', 'Beverage'].map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
+          </TextField>
           <Button
             variant="contained"
             type="submit"

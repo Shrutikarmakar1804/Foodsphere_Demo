@@ -20,14 +20,14 @@ const modalStyle = {
 export default function FoodCategoryTable() {
   const [open, setOpen] = useState(false);
   const [foodCategories, setFoodCategories] = useState([
-    { id: "FOOD01", name: 'Biryani' },
-    { id: "FOOD02", name: 'Fried Chicken Wings' },
-    { id: "FOOD03", name: 'Chicken Sausage Pizza' },
-    { id: "FOOD04", name: 'Coca-Cola' },
-    { id: "FOOD05", name: 'Pepsi' },
-    { id: "FOOD06", name: 'Butter Panner Masala' },
-    { id: "FOOD07", name: 'Chocolate Cake' },
-    { id: "FOOD08", name: 'Mango Mouse' }
+    { id: "FOOD01", name: 'Biryani', category: 'Main Course' },
+    { id: "FOOD02", name: 'Fried Chicken Wings', category: 'Starter' },
+    { id: "FOOD03", name: 'Chicken Sausage Pizza', category: 'Main Course' },
+    { id: "FOOD04", name: 'Coca-Cola', category: 'Beverage' },
+    { id: "FOOD05", name: 'Pepsi', category: 'Beverage' },
+    { id: "FOOD06", name: 'Butter Panner Masala', category: 'Main Course' },
+    { id: "FOOD07", name: 'Chocolate Cake', category: 'Dessert' },
+    { id: "FOOD08", name: 'Mango Mouse', category: 'Dessert' }
   ]);
 
   const handleOpen = () => setOpen(true);
@@ -35,7 +35,14 @@ export default function FoodCategoryTable() {
 
   const handleAddCategory = (newCategory) => {
     const newId = `FOOD${(foodCategories.length + 1).toString().padStart(2, '0')}`;
-    setFoodCategories([...foodCategories, { id: newId, name: newCategory.name }]);
+    setFoodCategories([
+      ...foodCategories,
+      {
+        id: newId,
+        name: newCategory.name,
+        category: newCategory.type || "Uncategorized",
+      }
+    ]);
     handleClose();
   };
 
@@ -62,20 +69,20 @@ export default function FoodCategoryTable() {
                 <TableRow>
                   <TableCell align="left" className="text-white">Food ID</TableCell>
                   <TableCell align="left" className="text-white">Food Name</TableCell>
+                  <TableCell align="left" className="text-white">Category Name</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {foodCategories.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    hover
-                  >
+                  <TableRow key={row.id} hover>
                     <TableCell component="th" scope="row" className="text-white">
                       {row.id}
                     </TableCell>
                     <TableCell align="left" className="text-white">
                       {row.name}
+                    </TableCell>
+                    <TableCell align="left" className="text-white">
+                      {row.category || "Uncategorized"}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -85,13 +92,7 @@ export default function FoodCategoryTable() {
         </Card>
       </main>
 
-      {/* Modal with Framer Motion */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="add-food-category-modal"
-        closeAfterTransition
-      >
+      <Modal open={open} onClose={handleClose} aria-labelledby="add-food-category-modal" closeAfterTransition>
         <Box sx={modalStyle}>
           <AnimatePresence>
             {open && (
