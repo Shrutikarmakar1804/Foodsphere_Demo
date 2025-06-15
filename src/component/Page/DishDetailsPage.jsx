@@ -7,7 +7,7 @@ import {
 
 
 
-import { demoDishes, demoRestaurants } from '../Data/mockData';
+import demoRestaurants, { demoDishes } from '../Data/mockData';
 import { useCart } from '../Context/CartContext';
 
 const DishDetailsPage = () => {

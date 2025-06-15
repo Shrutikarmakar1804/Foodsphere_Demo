@@ -10,7 +10,7 @@ import {
 import OrderTable from './OrderTable';
 
 const Orders = () => {
-  const [filter, setFilter] = useState("All"); // Default filter
+  const [filter, setFilter] = useState("All");
 
   const handleFilter = (e) => {
     setFilter(e.target.value);

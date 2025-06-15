@@ -66,13 +66,13 @@ const dishes = [
   },
   {
     id: 7,
-    name: 'Greek Gyro',
+    name: 'Greek Gyros',
     description: [
       'A traditional Greek dish',
       'made with meat cooked on a vertical rotisserie.'
     ],
-    price: 150,
-    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fkaynutrition.com%2Fgreek-chicken-gyros%2F&psig=AOvVaw0n_ekxPQmxWwqBegjpMFvX&ust=1750048871409000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCsiJ3O8o0DFQAAAAAdAAAAABAE',
+    price:  150,
+    image: 'https://images.pexels.com/photos/29906167/pexels-photo-29906167/free-photo-of-delicious-greek-gyros-on-sunny-day.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   },
   {
     id: 8,
@@ -213,17 +213,17 @@ const TopDishes = () => {
         Top dishes near you
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {dishes.map((dish) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={dish.id}>
+          <Grid size={{xs:2}} sm={6} md={4} lg={3} key={dish.id}>
             <Link to={`/dish/${dish.id}`} style={{ textDecoration: 'none' }}>
               <Card sx={{ borderRadius: 3, backgroundColor: '#111', color: 'white', '&:hover': { transform: 'scale(1.03)', transition: '0.3s' } }}>
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="200"
                   image={dish.image}
                   alt={dish.name}
-                  sx={{ objectFit: 'cover', width: '100%', maxHeight: 140 }}
+                  sx={{ objectFit: 'cover', width: '100%', maxHeight: 180 }}
                 />
                 <CardContent>
                   <Typography variant="h6">{dish.name}</Typography>

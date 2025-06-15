@@ -14,7 +14,6 @@ const RestaurantCard = ({ item }) => {
   };
 
   const handleNavigateToRestaurant = () => {
-    // For demo: use simple `/restaurant/:id` route
     navigate(`/restaurant/${item.id}`);
   };
 
@@ -32,14 +31,15 @@ const RestaurantCard = ({ item }) => {
         <Chip
           size="small"
           className="absolute top-2 left-2"
-          color={item.open ? "success" : "error"}
-          label={item.open ? "Open" : "Closed"}
+          color={item.status === "Open" ? "success" : "error"}
+          label={item.status === "Open" ? "Open" : "Closed"}
         />
       </div>
 
       <div className="p-4 flex justify-between items-start">
         <div className="space-y-1">
           <p className="font-semibold text-lg">{item.name}</p>
+          <p className="text-yellow-500 text-sm font-medium">⭐ {item.rating}</p>
           <p className="text-gray-500 text-sm">{item.description}</p>
         </div>
         <IconButton onClick={handleToggleFavorite}>

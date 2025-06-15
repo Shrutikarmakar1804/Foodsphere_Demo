@@ -16,6 +16,7 @@ import Profile from "../Profile/Profile";
 import Cart from "../Cart/Cart";
 import DishDetailsPage from "../Page/DishDetailsPage";
 import FoodDetailsPage from "../Home/FoodDetailsPage";
+import RestaurantPage from "../Page/RestaurantPages";
 
 
 
@@ -43,6 +44,7 @@ export const CustomerRoute = () => {
         <Route path="/my-profile/*" element={<Profile />} />
         <Route path="/dish/:id" element={<DishDetailsPage />} />
          <Route path="/food/:id" element={<FoodDetailsPage />} />
+         <Route path="/restaurant/:id" element={<RestaurantPage />} />
           
 
 

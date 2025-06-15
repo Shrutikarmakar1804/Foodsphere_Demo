@@ -34,7 +34,7 @@ const Admin = () => {
           <Route path="add-menu" element={<CreateMenuForm />} />
           <Route path="create-order" element={<CreateOrder />} />
           <Route path="admin/create-order" element={<OrderCreatePage />} />
-          <Route path="add-food/:id" element={<AddFood />} /> {/* ✅ FINAL */}
+          <Route path="add-food/:id" element={<AddFood />} /> 
         </Routes>
       </div>
     </div>

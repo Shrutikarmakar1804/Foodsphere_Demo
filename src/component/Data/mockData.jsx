@@ -1,4 +1,4 @@
-export const demoRestaurants = [
+ const demoRestaurants = [
     {
         id: 1,
         name: 'The Greek Tavern',
@@ -36,6 +36,7 @@ export const demoRestaurants = [
         image: 'https://source.unsplash.com/400x300/?restaurant,pasta',
     },
 ];
+export default demoRestaurants;
 
 export const demoDishes = [
     {
@@ -100,13 +101,13 @@ export const demoDishes = [
   },
   {
     id: 7,
-    name: 'Greek Gyro',
+    name: 'Greek Gyros',
     description: [
       'A traditional Greek dish',
       'made with meat cooked on a vertical rotisserie.'
     ],
     price: 150,
-    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fkaynutrition.com%2Fgreek-chicken-gyros%2F&psig=AOvVaw0n_ekxPQmxWwqBegjpMFvX&ust=1750048871409000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCsiJ3O8o0DFQAAAAAdAAAAABAE',
+    image: 'https://images.pexels.com/photos/29906167/pexels-photo-29906167/free-photo-of-delicious-greek-gyros-on-sunny-day.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   },
   {
     id: 8,
