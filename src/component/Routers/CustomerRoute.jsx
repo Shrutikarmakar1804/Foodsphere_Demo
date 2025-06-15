@@ -22,30 +22,31 @@ export const CustomerRoute = () => {
 
   return (
     <div>
-      
+
       <Navbar />
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route path="/account/:register" element={<Home />} />
         <Route path="/resturant/city/:title/:id" element={<RestaurantDetails />} />
-        <Route path="/search" element={<Search/>} />
+        <Route path="/search" element={<Search />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/help" element={<Help/>} />
+        <Route path="/help" element={<Help />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/offers" element={<Offers />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/terms" element={<Terms/>} />
-        <Route path="/my-profile/*" element={<Profile/>} />
-     <Route path="/dish/:id" element={<DishDetailsPage />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/my-profile/*" element={<Profile />} />
+        <Route path="/dish/:id" element={<DishDetailsPage />} />
 
 
-        
-        
+
+
+
       </Routes>
-      <Auth/>
+      <Auth />
     </div>
   );
 };

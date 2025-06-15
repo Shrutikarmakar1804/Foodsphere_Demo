@@ -1,10 +1,44 @@
-import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardMedia, IconButton } from '@mui/material';
-import { AddCircleOutline } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+export const demoRestaurants = [
+    {
+        id: 1,
+        name: 'The Greek Tavern',
+        description: 'Authentic Greek cuisine with a modern twist.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,greek',
+    },
+    {
+        id: 2,
+        name: 'Clover Leaf Bistro',
+        description: 'A cozy bistro offering seasonal dishes and local ingredients.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,bistro',
+    },
+    {
+        id: 3,
+        name: 'Chicken Delight',
+        description: 'Famous for our grilled chicken and homemade sauces.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,chicken',
+    },
+    {
+        id: 4,
+        name: 'Biryani Palace',
+        description: 'Experience the royal taste of authentic biryani.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,biryani',
+    },
+    {
+        id: 5,
+        name: 'Paneer Paradise',
+        description: 'Vegetarian haven with a variety of paneer dishes.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,paneer',
+    },
+    {
+        id: 6,
+        name: 'Pasta Perfection',
+        description: 'Italian pasta dishes made with love and tradition.',
+        image: 'https://source.unsplash.com/400x300/?restaurant,pasta',
+    },
+];
 
-const dishes = [
-  {
+export const demoDishes = [
+    {
     id: 1,
     name: 'Greek salad',
     description: [
@@ -205,45 +239,3 @@ const dishes = [
     image: 'https://s.lightorangebean.com/media/20240914144639/Thai-Vegetable-Stir-Fry-with-Lime-and-Ginger_done.png',
   },
 ];
-
-const TopDishes = () => {
-  return (
-    <Box p={3}>
-      <Typography variant="h5" fontWeight="bold" mb={3} color="white">
-        Top dishes near you
-      </Typography>
-
-      <Grid container spacing={3}>
-        {dishes.map((dish) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={dish.id}>
-            <Link to={`/dish/${dish.id}`} style={{ textDecoration: 'none' }}>
-              <Card sx={{ borderRadius: 3, backgroundColor: '#111', color: 'white', '&:hover': { transform: 'scale(1.03)', transition: '0.3s' } }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={dish.image}
-                  alt={dish.name}
-                  sx={{ objectFit: 'cover', width: '100%', maxHeight: 140 }}
-                />
-                <CardContent>
-                  <Typography variant="h6">{dish.name}</Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {dish.description}
-                  </Typography>
-                  <Typography variant="subtitle1" fontWeight="bold">
-                    ₹{dish.price}
-                  </Typography>
-                  <IconButton color="info">
-                    <AddCircleOutline />
-                  </IconButton>
-                </CardContent>
-              </Card>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  );
-};
-
-export default TopDishes;

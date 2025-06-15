@@ -11,6 +11,7 @@ import Events from '../Events/Events'
 import Orders from '../Orders/Orders'
 import Menu from '../Menu/Menu'
 import OrderCreatePage from '../Orders/OrderCreatePage'
+import AddFood from '../AddFood/AddFood'
 
 
 
@@ -37,6 +38,10 @@ const Admin = () => {
                         <Route path='add-menu' element={<CreateMenuForm />}/>
                         <Route path='create-order' element={<CreateOrder />}/>
                         <Route path='admin/create-order' element={<OrderCreatePage />}/>
+                        <Route path='add-food' element={<AddFood />}/>
+                        <Route path='add-food/:id' element={<AddFood />}/>
+
+
                     </Routes>
                 </div>
         </div>

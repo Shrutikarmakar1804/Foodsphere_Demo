@@ -1,81 +1,91 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Button, TextField, Divider, IconButton } from "@mui/material";
+import React from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Divider,
+  IconButton
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/CartContext";
+
 
 const Cart = () => {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const savedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(savedItems);
-
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
-  }, []);
-
-  const saveCart = (updatedCart) => {
-    setCartItems(updatedCart);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-  };
-
-  const handleRemoveItem = (id) => {
-    const updated = cartItems.filter((item) => item.id !== id);
-    saveCart(updated);
-  };
+  const { cartItems, removeFromCart } = useCart();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const deliveryFee = subtotal > 0 ? 40 : 0;
   const total = subtotal + deliveryFee;
 
   const handleProceedToPay = () => {
-  // Re-check login status from localStorage
-  const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-  setIsLoggedIn(loggedIn);
+    if (subtotal === 0) {
+      alert("Your cart is empty.");
+      navigate("/");
+      return;
+    }
+    localStorage.setItem("orderTotal", total);
+    navigate("/payment", { state: { total } });
+  };
 
-  if (subtotal === 0) {
-    alert("Your cart is empty. Please add items before proceeding to checkout.");
-    return;
-  }
+  // Promo code state
+  const [promoCode, setPromoCode] = React.useState("");
+  const [appliedCode, setAppliedCode] = React.useState("");
+  const [discount, setDiscount] = React.useState(0);
+  const [promoError, setPromoError] = React.useState("");
 
-  // if (!loggedIn) {
-  //   alert("Please log in or register to proceed to checkout.");
-  //   navigate("/login");
-  //   return;
-  // }
+  // Example: Only allow codes with uppercase letters and numbers, min 4 chars
+  const promoCodeRegex = /^[A-Z0-9]{4,}$/;
 
-  localStorage.setItem("orderTotal", total);
-  navigate("/payment", { state: { total } });
-};
+  const handlePromoInput = (e) => {
+    // Only allow uppercase letters and numbers
+    const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+    setPromoCode(value);
+    setPromoError("");
+  };
 
+  const handleApplyPromo = () => {
+    if (!promoCodeRegex.test(promoCode)) {
+      setPromoError("Invalid code. Use block letters and numbers only.");
+      return;
+    }
+    // Example: Apply a flat 10% discount for any valid code
+    setDiscount(subtotal * 0.1);
+    setAppliedCode(promoCode);
+    setPromoError("");
+  };
+
+  const discountedTotal = subtotal - discount + deliveryFee;
 
   return (
     <Box p={4}>
       <Typography variant="h5" gutterBottom>Your Cart</Typography>
 
-      {/* Table Headers */}
+      {/* Headers */}
       <Box display="flex" justifyContent="space-between" px={2} mb={3}>
-        {['Item', 'Title', 'Price', 'Quantity', 'Total', 'Remove'].map(header => (
-          <Typography key={header} variant="subtitle2" color="textSecondary">
-            {header}
-          </Typography>
+        {['Item', 'Title', 'Price', 'Qty', 'Total', 'Remove'].map(h => (
+          <Typography key={h} variant="subtitle2" color="textSecondary">{h}</Typography>
         ))}
       </Box>
       <Divider />
 
-      {/* Cart Items */}
+      {/* Items */}
       {cartItems.map((item) => (
         <Box key={item.id} display="flex" alignItems="center" justifyContent="space-between" px={2} py={2}>
           <Box width={80} height={80}>
-            <img src={item.image} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img
+              src={item.image}
+              alt={item.name}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </Box>
           <Typography>{item.name}</Typography>
           <Typography>₹{item.price}</Typography>
           <Typography>{item.quantity}</Typography>
           <Typography>₹{item.price * item.quantity}</Typography>
-          <IconButton onClick={() => handleRemoveItem(item.id)}>
+          <IconButton onClick={() => removeFromCart(item.id)}>
             <DeleteIcon />
           </IconButton>
         </Box>
@@ -83,7 +93,7 @@ const Cart = () => {
 
       <Divider sx={{ mt: 4, mb: 6 }} />
 
-      {/* Cart Summary */}
+      {/* Summary */}
       <Box display="flex" justifyContent="space-between" mt={2} flexWrap="wrap">
         <Box flex="1" maxWidth="400px">
           <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -93,6 +103,12 @@ const Cart = () => {
             <Typography>Subtotal</Typography>
             <Typography>₹{subtotal}</Typography>
           </Box>
+          {discount > 0 && (
+            <Box display="flex" justifyContent="space-between" my={1}>
+              <Typography color="success.main">Promo ({appliedCode})</Typography>
+              <Typography color="success.main">-₹{discount.toFixed(2)}</Typography>
+            </Box>
+          )}
           <Divider />
           <Box display="flex" justifyContent="space-between" my={1}>
             <Typography>Delivery Fee</Typography>
@@ -101,11 +117,32 @@ const Cart = () => {
           <Divider />
           <Box display="flex" justifyContent="space-between" my={1}>
             <Typography fontWeight="bold">Total</Typography>
-            <Typography fontWeight="bold">₹{total}</Typography>
+            <Typography fontWeight="bold">₹{discountedTotal.toFixed(2)}</Typography>
           </Box>
           <Button
             variant="contained"
-            onClick={handleProceedToPay}
+            onClick={() => {
+              if (subtotal === 0) {
+                alert("Your cart is empty.");
+                navigate("/");
+                return;
+              }
+              // Store all relevant payment info for PaymentPage
+              localStorage.setItem("orderTotal", discountedTotal);
+              localStorage.setItem("orderSubtotal", subtotal);
+              localStorage.setItem("orderDeliveryFee", deliveryFee);
+              localStorage.setItem("orderDiscount", discount);
+              localStorage.setItem("orderPromoCode", appliedCode);
+              navigate("/payment", {
+                state: {
+                  total: discountedTotal,
+                  subtotal,
+                  deliveryFee,
+                  discount,
+                  promoCode: appliedCode
+                }
+              });
+            }}
             sx={{ mt: 2, bgcolor: "#ff5722", px: 4, py: 1.5 }}
             fullWidth
           >
@@ -120,15 +157,25 @@ const Cart = () => {
           </Typography>
           <Box display="flex">
             <TextField
-              placeholder="promo code"
+              placeholder="PROMO CODE"
               fullWidth
               variant="outlined"
               size="small"
               sx={{ mr: 1, flexGrow: 1 }}
-              InputProps={{ style: { borderRadius: 4, padding: "8px 12px" } }}
+              value={promoCode}
+              onChange={handlePromoInput}
+              InputProps={{ style: { textTransform: "uppercase", letterSpacing: 2 } }}
+              error={!!promoError}
+              helperText={promoError}
+              disabled={!!appliedCode}
             />
-            <Button variant="contained" sx={{ bgcolor: "primary.main", color: "#fff", px: 3 }}>
-              SUBMIT
+            <Button
+              variant="contained"
+              sx={{ bgcolor: "primary.main", px: 3 }}
+              onClick={handleApplyPromo}
+              disabled={!!appliedCode}
+            >
+              {appliedCode ? "APPLIED" : "SUBMIT"}
             </Button>
           </Box>
         </Box>

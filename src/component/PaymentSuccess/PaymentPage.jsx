@@ -198,8 +198,8 @@ export default function PaymentPage() {
               <Typography>₹{totalAmount.toFixed(2)}</Typography>
             </Box>
             <Box display="flex" justifyContent="space-between" mb={1}>
-              <Typography>GST (21%):</Typography>
-              <Typography>₹{(totalAmount * 0.21).toFixed(2)}</Typography>
+              <Typography>GST (18%):</Typography>
+              <Typography>₹{(totalAmount * 0.18).toFixed(2)}</Typography>
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box display="flex" justifyContent="space-between" mb={3}>
@@ -208,7 +208,7 @@ export default function PaymentPage() {
             </Box>
 
             <Divider sx={{ my: 2 }} />
-            <Typography variant="h6">Total: ₹{totalAmount.toFixed(2)}</Typography>
+            {/* <Typography variant="h6">Total: ₹{totalAmount.toFixed(2)}</Typography> */}
             <Box mt={2}>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Box

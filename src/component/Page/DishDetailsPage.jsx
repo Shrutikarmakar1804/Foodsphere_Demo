@@ -1,191 +1,118 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Box,
-  Typography,
-  Card,
-  CardMedia,
-  CardContent,
-  Button,
-  Rating,
-  Divider,
-  IconButton,
-  Stack,
-  Grid,
-  Paper,
+  Box, Typography, Card, CardMedia, CardContent,
+  Button, Stack, Divider, Grid, Snackbar, Alert
 } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
 
-// LocalStorage cart logic
-const useCart = () => {
-  const [cartItems, setCartItems] = useState(() => {
-    return JSON.parse(localStorage.getItem("cartItems")) || [];
-  });
 
-  const saveCart = (items) => {
-    setCartItems(items);
-    localStorage.setItem("cartItems", JSON.stringify(items));
-  };
 
-  const addToCart = (item) => {
-    const existing = cartItems.find((i) => i.id === item.id);
-    if (!existing) {
-      const updated = [...cartItems, item];
-      saveCart(updated);
-    }
-  };
-
-  const updateCartItemQuantity = (id, quantity) => {
-    const updated = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity } : item
-    );
-    saveCart(updated);
-  };
-
-  return { cartItems, addToCart, updateCartItemQuantity };
-};
-
-// Demo dishes
-const demoDishes = [
-  {
-    id: 1,
-    name: "Caesar Salad",
-    description: "Crisp lettuce, creamy dressing, croutons & parmesan.",
-    image: "https://source.unsplash.com/400x300/?salad",
-    price: 120,
-  },
-  {
-    id: 2,
-    name: "Paneer Tikka",
-    description: "Grilled paneer with spicy masala.",
-    image: "https://source.unsplash.com/400x300/?paneer",
-    price: 180,
-  },
-  {
-    id: 3,
-    name: "Margherita Pizza",
-    description: "Classic cheese pizza with rich tomato base.",
-    image: "https://source.unsplash.com/400x300/?pizza",
-    price: 250,
-  },
-  {
-    id: 4,
-    name: "Veg Biryani",
-    description: "Fragrant rice and vegetables, spiced to perfection.",
-    image: "https://source.unsplash.com/400x300/?biryani",
-    price: 220,
-  },
-];
+import { demoDishes, demoRestaurants } from '../Data/mockData';
+import { useCart } from '../Context/CartContext';
 
 const DishDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { cartItems, addToCart, updateCartItemQuantity } = useCart();
+  const { addToCart } = useCart();
 
-  const dish = demoDishes.find((item) => item.id.toString() === id);
-  const existingItem = cartItems.find((item) => item.id === dish?.id);
-  const [quantity, setQuantity] = useState(existingItem ? existingItem.quantity : 1);
+  const dish = demoDishes.find((d) => d.id.toString() === id);
+  const restaurant = demoRestaurants.find(r => r.id === dish?.restaurantId);
+  const recommended = demoDishes.filter(
+    d => d.restaurantId === dish?.restaurantId && d.id !== dish.id
+  );
 
-  useEffect(() => {
-    if (existingItem) setQuantity(existingItem.quantity);
-  }, [existingItem]);
+  const [quantity, setQuantity] = useState(1);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  if (!dish) return <Typography variant="h5">Dish not found.</Typography>;
+  if (!dish) return <Typography>Dish not found</Typography>;
 
   const handleAddToCart = () => {
-    if (existingItem) {
-      updateCartItemQuantity(dish.id, quantity);
-    } else {
-      addToCart({ ...dish, quantity });
-    }
-    alert("Item added/updated in cart!");
-  };
-
-  const handleProceed = () => {
-    handleAddToCart();
-    navigate("/cart");
+    addToCart({ ...dish, quantity });
+    setOpenSnackbar(true);
   };
 
   return (
-    <Box p={3}>
-      <Button onClick={() => navigate(-1)} variant="outlined" sx={{ mb: 2 }}>
-        ← Back to Menu
-      </Button>
+    <Box p={4}>
+      <Button onClick={() => navigate(-1)} variant="outlined">← Back</Button>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardMedia component="img" height="300" image={dish.image} alt={dish.name} />
-          </Card>
-        </Grid>
+      <Card sx={{ mt: 3, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+        <CardContent sx={{ flex: 1 }}>
+          <Typography variant="h4" gutterBottom>{dish.name}</Typography>
+          <Typography variant="subtitle1" gutterBottom>{dish.description}</Typography>
+          <Typography variant="body2" gutterBottom color="text.secondary">
+            From: <strong>{restaurant?.name}</strong>
+          </Typography>
+          <Typography variant="h6" color="primary">₹{dish.price}</Typography>
 
-        <Grid item xs={12} md={6}>
-          <Typography variant="h4" fontWeight="bold">{dish.name}</Typography>
-          <Typography variant="body1" sx={{ mt: 1 }}>{dish.description}</Typography>
-          <Typography variant="h6" sx={{ mt: 2 }} color="primary">Price: ₹{dish.price}</Typography>
-
-          {/* Quantity Controls */}
-          <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 3 }}>
-            <Typography>Quantity:</Typography>
-            <IconButton onClick={() => setQuantity((q) => Math.max(1, q - 1))}>
-              <Remove />
-            </IconButton>
+          <Stack direction="row" spacing={2} mt={2} alignItems="center">
+            <Button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</Button>
             <Typography>{quantity}</Typography>
-            <IconButton onClick={() => setQuantity((q) => q + 1)}>
-              <Add />
-            </IconButton>
-          </Stack>
+            <Button onClick={() => setQuantity(q => q + 1)}>+</Button>
 
-          <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
-            <Button variant="contained" onClick={handleAddToCart}>
-              {existingItem ? "Update Cart" : "Add to Cart"}
+            <Button
+              variant="contained"
+              onClick={() => {
+                handleAddToCart();
+                navigate('/cart');
+              }}
+            >
+              Add to Cart 
             </Button>
-            <Button variant="outlined" color="secondary" onClick={handleProceed}>
-              Proceed to Cart
-            </Button>
           </Stack>
+        </CardContent>
+        <CardMedia
+          component="img"
+          image={dish.image}
+          alt={dish.name}
+          sx={{
+            height: 180,
+            width: 180,
+            objectFit: 'cover',
+            mx: { xs: 'auto', md: 3 },
+            my: { xs: 2, md: 0 },
+            borderRadius: 2,
+            order: { xs: 0, md: 2 }
+          }}
+        />
+      </Card>
 
-          <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 4 }} />
 
-          <Typography variant="h6" gutterBottom>Customer Rating</Typography>
-          <Rating value={4.5} precision={0.5} readOnly />
-          <Typography variant="body2" sx={{ mt: 1 }}>
-            ⭐️ “Amazing taste and fresh ingredients!” — Demo User
-          </Typography>
-          <Typography variant="body2">
-            ⭐️ “Would definitely order again.” — Test Customer
-          </Typography>
-        </Grid>
+      <Typography variant="h6">More from {restaurant?.name}</Typography>
+      <Grid container spacing={2} mt={1}>
+        {recommended.map(item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Card onClick={() => navigate(`/dish/${item.id}`)} sx={{ cursor: 'pointer' }}>
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt={item.name}
+                sx={{
+                  height: 120,
+                  width: '100%',
+                  objectFit: 'cover'
+                }}
+              />
+              <CardContent>
+                <Typography variant="subtitle1">{item.name}</Typography>
+                <Typography variant="body2" color="text.secondary">₹{item.price}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
-      {/* Related Dishes */}
-      <Box mt={5}>
-        <Typography variant="h5" gutterBottom>Related Dishes</Typography>
-        <Grid container spacing={2}>
-          {demoDishes.filter(d => d.id !== dish.id).slice(0, 3).map((related) => (
-            <Grid item xs={12} sm={6} md={4} key={related.id}>
-              <Paper elevation={3} sx={{ p: 2 }}>
-                <img
-                  src={related.image}
-                  alt={related.name}
-                  style={{ width: "100%", height: 150, objectFit: "cover", borderRadius: 8 }}
-                />
-                <Typography variant="subtitle1" fontWeight="bold" mt={1}>
-                  {related.name}
-                </Typography>
-                <Typography variant="body2">₹{related.price}</Typography>
-                <Button
-                  variant="text"
-                  onClick={() => navigate(`/dish/${related.id}`)}
-                  sx={{ mt: 1 }}
-                >
-                  View Details →
-                </Button>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {/* Snackbar Confirmation */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+          Added to cart!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

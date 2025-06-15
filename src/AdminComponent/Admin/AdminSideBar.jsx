@@ -8,6 +8,7 @@ import {
   AdminPanelSettings as AdminPanelSettingsIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {
   Divider,
   Drawer,
@@ -23,9 +24,11 @@ const menu = [
   { title: "Menu", icon: <ShopTwoIcon />, path: "menu" },
   { title: "Food Category", icon: <CategoryIcon />, path: "food-category" },
   { title: "Ingredients", icon: <FastfoodIcon />, path: "ingredients" },
+  { title: "Add Food", icon: <AddCircleOutlineIcon />, path: "add-food" },
   { title: "Events", icon: <EventIcon />, path: "events" },
   { title: "Details", icon: <AdminPanelSettingsIcon />, path: "details" },
   { title: "Logout", icon: <LogoutIcon />, path: "logout" },
+
   
 ];
 
@@ -52,7 +55,7 @@ export const AdminSideBar = ({ open, handleClose }) => {
       anchor="left"
       sx={{ zIndex: 1 }}
     >
-      <div className="w-[60vw] md:w-[20vw] h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-white shadow-lg flex flex-col">
+      <div className="w-[30vw] md:w-[20vw] h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-white shadow-lg flex flex-col">
         
         <div className="px-6 py-5 text-2xl font-bold border-b border-gray-300 dark:border-gray-700">
           Admin Panel
