@@ -66,6 +66,7 @@ const AddFood = () => {
               {['name', 'price', 'description', 'image'].map(field => (
                 <Grid size={{xs:12}} sm={6} key={field}>
                   <TextField
+                    size="small"
                     fullWidth
                     label={field.charAt(0).toUpperCase() + field.slice(1)}
                     variant="outlined"
@@ -76,8 +77,8 @@ const AddFood = () => {
               ))}
 
               {/* Ingredient Multi-Select */}
-              <Grid size={{xs:6}} sm={6}>
-                <FormControl fullWidth>
+              <Grid size={{xs:12}} sm={6}>
+                <FormControl fullWidth size="small">
                   <InputLabel>Ingredients</InputLabel>
                   <Select
                     multiple
@@ -87,7 +88,7 @@ const AddFood = () => {
                     renderValue={(selected) => (
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                         {selected.map((value) => (
-                          <Chip key={value} label={value} />
+                          <Chip key={value} label={value} size="small" />
                         ))}
                       </Box>
                     )}
@@ -102,8 +103,8 @@ const AddFood = () => {
               </Grid>
 
               {/* Category Dropdown */}
-              <Grid size={{xs:6}} sm={6}>
-                <FormControl fullWidth>
+              <Grid size={{xs:12}} sm={6}>
+                <FormControl fullWidth size="small">
                   <InputLabel>Category</InputLabel>
                   <Select
                     value={newDish.category}
@@ -118,7 +119,7 @@ const AddFood = () => {
               </Grid>
 
               <Grid size={{xs:12}} sm={12} display="flex" justifyContent="flex-end">
-                <Button variant="contained" onClick={handleAddDish}>
+                <Button variant="contained" size="small" onClick={handleAddDish}>
                   Add Dish
                 </Button>
               </Grid>
@@ -133,7 +134,7 @@ const AddFood = () => {
           <Grid container spacing={3}>
             {dishes.map((dish, index) => (
               <Grow in key={dish.id} timeout={500 + index * 100}>
-                <Grid size={{xs:12}} sm={6} md={4}>
+                <Grid size={{xs:4}} sm={6} md={4}>
                   <StyledCard elevation={4}>
                     <CardMedia
                       component="img"

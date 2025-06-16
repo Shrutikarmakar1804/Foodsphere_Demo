@@ -79,8 +79,11 @@ const ContactPage = () => {
         <div className="bg-white p-6 rounded-2xl shadow-lg">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">Get in touch</h2>
 
-          {/* ✅ Form starts */}
-          <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
+          <form
+            action="https://formspree.io/f/xayrjzqk"
+            method="POST"
+            className="flex flex-col space-y-5"
+          >
             <div className="flex flex-col">
               <label htmlFor="name" className="text-gray-700 font-semibold mb-1">Name</label>
               <input
@@ -91,6 +94,7 @@ const ContactPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className="p-3 bg-gray-100 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm"
+                required
               />
               {errors.name && <span className="text-sm text-red-500 mt-1">{errors.name}</span>}
             </div>
@@ -105,6 +109,7 @@ const ContactPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="p-3 bg-gray-100 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm"
+                required
               />
               {errors.email && <span className="text-sm text-red-500 mt-1">{errors.email}</span>}
             </div>
@@ -119,6 +124,7 @@ const ContactPage = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="p-3 bg-gray-100 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm resize-none"
+                required
               />
               {errors.message && <span className="text-sm text-red-500 mt-1">{errors.message}</span>}
             </div>
@@ -130,7 +136,6 @@ const ContactPage = () => {
               Submit
             </button>
           </form>
-          {/* ✅ Form ends */}
 
           <p className="text-xs text-gray-500 mt-6 text-center">
             By contacting us you agree to the{' '}

@@ -34,7 +34,7 @@ const modalStyle = {
 const RestaurantDetails = () => {
   const [open, setOpen] = useState(false);
   const [restaurantData, setRestaurantData] = useState({
-    name: 'The Great Indian Restaurant',
+    name: 'FlavorFusion Bistro',
     owner: 'Shruti Karmakar',
     cuisine: 'Indian',
     hours: '9:00 AM - 10:00 PM',

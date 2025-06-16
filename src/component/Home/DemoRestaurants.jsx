@@ -1,31 +1,34 @@
 const demoRestaurants = [
-  {
-    id: 1,
-    name: "Spicy Palace",
-    description: "Authentic Indian Cuisine with rich flavors",
-    rating: 4.5,
-    location: "Kolkata",
-    image:
-      "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 2,
-    name: "Biryani House",
-    description: "Best Dum Biryani in town",
-    rating: 4.7,
-    location: "Hyderabad",
-    image:
-      "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    id: 3,
-    name: "Tandoori Flames",
-    description: "Hot and spicy North Indian dishes",
-    rating: 4.3,
-    location: "Delhi",
-    image:
-      "https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
+    {
+        id: 1,
+        name: "Salad Palace",
+        description: "Authentic Indian Cuisine with rich flavors",
+        rating: 4.5,
+        location: "Kolkata",
+        image:
+            "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
+    },
+    {
+        id: 2,
+        name: "Biryani House",
+        description: "Best Dum Biryani in town",
+        rating: 4.7,
+        location: "Hyderabad",
+        image:
+            "https://images.pexels.com/photos/16020573/pexels-photo-16020573/free-photo-of-rice-and-chicken-meal-on-the-plate.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 800
+    },
+    {
+        id: 3,
+        name: "Tandoori Flames",
+        description: "Hot and spicy North Indian dishes",
+        rating: 4.3,
+        location: "Delhi",
+        image:
+            "https://images.pexels.com/photos/17050759/pexels-photo-17050759/free-photo-of-curry-meat-based-dishes-served-on-white-plates.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
+    },
     {
         id: 4,
         name: "Curry Corner",
@@ -33,7 +36,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Mumbai",
         image:
-        "https://images.pexels.com/photos/1640778/pexels-photo-1640778.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/6544376/pexels-photo-6544376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 5,
@@ -42,7 +46,8 @@ const demoRestaurants = [
         rating: 4.4,
         location: "Chennai",
         image:
-        "https://images.pexels.com/photos/1640779/pexels-photo-1640779.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/30700761/pexels-photo-30700761/free-photo-of-delicious-japanese-curry-dish-with-rice.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 6,
@@ -51,7 +56,8 @@ const demoRestaurants = [
         rating: 4.2,
         location: "Bangalore",
         image:
-        "https://images.pexels.com/photos/1640780/pexels-photo-1640780.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 7,
@@ -60,7 +66,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Kochi",
         image:
-        "https://images.pexels.com/photos/1640781/pexels-photo-1640781.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 800
     },
     {
         id: 8,
@@ -69,7 +76,8 @@ const demoRestaurants = [
         rating: 4.9,
         location: "Ahmedabad",
         image:
-        "https://images.pexels.com/photos/1640782/pexels-photo-1640782.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/32551700/pexels-photo-32551700/free-photo-of-chocolate-and-raspberry-dessert-close-up.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 9,
@@ -78,7 +86,8 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Pune",
         image:
-        "https://images.pexels.com/photos/1640783/pexels-photo-1640783.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/4331490/pexels-photo-4331490.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 10,
@@ -87,7 +96,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Jaipur",
         image:
-        "https://images.pexels.com/photos/1640784/pexels-photo-1640784.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/19834446/pexels-photo-19834446/free-photo-of-soup-with-vegetables.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 11,
@@ -96,7 +106,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Lucknow",
         image:
-        "https://images.pexels.com/photos/1640785/pexels-photo-1640785.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 800
     },
     {
         id: 12,
@@ -105,7 +116,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Goa",
         image:
-        "https://images.pexels.com/photos/1640786/pexels-photo-1640786.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/8818667/pexels-photo-8818667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 800
     },
     {
         id: 13,
@@ -114,7 +126,8 @@ const demoRestaurants = [
         rating: 4.4,
         location: "Varanasi",
         image:
-        "https://images.pexels.com/photos/1640787/pexels-photo-1640787.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/13063307/pexels-photo-13063307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 14,
@@ -123,7 +136,8 @@ const demoRestaurants = [
         rating: 4.3,
         location: "Dehradun",
         image:
-        "https://images.pexels.com/photos/1640788/pexels-photo-1640788.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/15082977/pexels-photo-15082977/free-photo-of-two-glasses-of-milk-with-cinnamon-and-nuts.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 15,
@@ -132,7 +146,8 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Chandigarh",
         image:
-        "https://images.pexels.com/photos/1640789/pexels-photo-1640789.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/5695615/pexels-photo-5695615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 16,
@@ -141,7 +156,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Mysore",
         image:
-        "https://images.pexels.com/photos/1640790/pexels-photo-1640790.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/9809033/pexels-photo-9809033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 17,
@@ -150,7 +166,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Indore",
         image:
-        "https://images.pexels.com/photos/1640791/pexels-photo-1640791.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 18,
@@ -159,7 +176,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Surat",
         image:
-        "https://images.pexels.com/photos/1640792/pexels-photo-1640792.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/28125427/pexels-photo-28125427/free-photo-of-naan-roti-tarkari-everest-tandoori-kitchen.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 19,
@@ -168,7 +186,8 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Agra",
         image:
-        "https://images.pexels.com/photos/1640793/pexels-photo-1640793.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/9609843/pexels-photo-9609843.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 20,
@@ -177,7 +196,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Vadodara",
         image:
-        "https://images.pexels.com/photos/1640794/pexels-photo-1640794.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/27254878/pexels-photo-27254878/free-photo-of-vegan-curry-masala.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 21,
@@ -186,7 +206,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Ranchi",
         image:
-        "https://images.pexels.com/photos/1640795/pexels-photo-1640795.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/18510422/pexels-photo-18510422/free-photo-of-a-yellow-bowl-filled-with-rice-and-vegetables.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 22,
@@ -195,7 +216,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Bhubaneswar",
         image:
-        "https://images.pexels.com/photos/1640796/pexels-photo-1640796.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/5827620/pexels-photo-5827620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 23,
@@ -204,7 +226,8 @@ const demoRestaurants = [
         rating: 4.4,
         location: "Patna",
         image:
-        "https://images.pexels.com/photos/1640797/pexels-photo-1640797.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/28674705/pexels-photo-28674705/free-photo-of-indian-dal-and-rice-in-traditional-utensils.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 24,
@@ -213,7 +236,8 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Guwahati",
         image:
-        "https://images.pexels.com/photos/1640798/pexels-photo-1640798.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/20408465/pexels-photo-20408465/free-photo-of-bowl-of-food-and-spices.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 25,
@@ -222,7 +246,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Shillong",
         image:
-        "https://images.pexels.com/photos/1640799/pexels-photo-1640799.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/31653131/pexels-photo-31653131/free-photo-of-delicious-japanese-curry-with-white-rice.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 26,
@@ -231,7 +256,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Imphal",
         image:
-        "https://images.pexels.com/photos/1640800/pexels-photo-1640800.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 27,
@@ -240,7 +266,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Aizawl",
         image:
-        "https://images.pexels.com/photos/1640801/pexels-photo-1640801.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/5827620/pexels-photo-5827620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 28,
@@ -249,16 +276,18 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Gangtok",
         image:
-        "https://images.pexels.com/photos/1640802/pexels-photo-1640802.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/20408465/pexels-photo-20408465/free-photo-of-bowl-of-food-and-spices.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 29,
-        name: "Spice Haven",
+        name: "Spicy Haven",
         description: "A haven for spice lovers",
         rating: 4.6,
         location: "Kohima",
         image:
-        "https://images.pexels.com/photos/1640803/pexels-photo-1640803.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/20408465/pexels-photo-20408465/free-photo-of-bowl-of-food-and-spices.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 400
     },
     {
         id: 30,
@@ -267,7 +296,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Itanagar",
         image:
-        "https://images.pexels.com/photos/1640804/pexels-photo-1640804.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/28674705/pexels-photo-28674705/free-photo-of-indian-dal-and-rice-in-traditional-utensils.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        price: 200
     },
     {
         id: 31,
@@ -276,7 +306,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Agartala",
         image:
-        "https://images.pexels.com/photos/1640805/pexels-photo-1640805.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640805/pexels-photo-1640805.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 32,
@@ -285,7 +316,8 @@ const demoRestaurants = [
         rating: 4.9,
         location: "Dimapur",
         image:
-        "https://images.pexels.com/photos/1640806/pexels-photo-1640806.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640806/pexels-photo-1640806.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 33,
@@ -294,7 +326,8 @@ const demoRestaurants = [
         rating: 4.5,
         location: "Kohima",
         image:
-        "https://images.pexels.com/photos/1640807/pexels-photo-1640807.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640807/pexels-photo-1640807.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 34,
@@ -303,7 +336,8 @@ const demoRestaurants = [
         rating: 4.6,
         location: "Gangtok",
         image:
-        "https://images.pexels.com/photos/1640808/pexels-photo-1640808.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640808/pexels-photo-1640808.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 35,
@@ -312,7 +346,8 @@ const demoRestaurants = [
         rating: 4.7,
         location: "Aizawl",
         image:
-        "https://images.pexels.com/photos/1640809/pexels-photo-1640809.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640809/pexels-photo-1640809.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 400
     },
     {
         id: 36,
@@ -321,7 +356,8 @@ const demoRestaurants = [
         rating: 4.8,
         location: "Imphal",
         image:
-        "https://images.pexels.com/photos/1640810/pexels-photo-1640810.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "https://images.pexels.com/photos/1640810/pexels-photo-1640810.jpeg?auto=compress&cs=tinysrgb&w=600",
+        price: 200
     },
 ];
 

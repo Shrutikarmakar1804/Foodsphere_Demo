@@ -82,7 +82,7 @@ export default function RestaurantPage() {
                             <h1 style={{ marginBottom: 8, fontSize: 32 }}>{restaurant.name}</h1>
                             <p style={{ fontSize: 18, marginBottom: 12, color: '#bdbdbd' }}>{restaurant.description}</p>
                             <p style={{ marginBottom: 6 }}>
-                                <strong>Location:</strong> {restaurant.city}
+                                <strong>Location:</strong> {restaurant.location}
                             </p>
                             <p style={{ marginBottom: 6 }}>
                                 <strong>Status:</strong>{' '}
@@ -106,8 +106,14 @@ export default function RestaurantPage() {
                                     <strong>Cuisine:</strong> {restaurant.cuisine}
                                 </p>
                             )}
+                            {restaurant.price && (
+                                <p style={{ marginBottom: 6 }}>
+                                    <strong>Price:</strong> {restaurant.price}
+                                </p>
+                            )}
                         </div>
                     </div>
+
                     {/* Related Foods Section */}
                     {restaurant.foods && restaurant.foods.length > 0 && (
                         <div style={{ marginTop: 32 }}>
@@ -139,7 +145,7 @@ export default function RestaurantPage() {
                                             <div style={{ color: '#fff', fontWeight: 500 }}>{food.name}</div>
                                             {food.price && (
                                                 <div style={{ color: '#ffd700', fontSize: 15, marginTop: 4 }}>
-                                                    ${food.price}
+                                                    ₹{food.price}
                                                 </div>
                                             )}
                                             <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
@@ -196,6 +202,8 @@ export default function RestaurantPage() {
                         </div>
                     )}
                 </div>
+
+                {/* Cart Sidebar */}
                 <div style={{
                     flex: 1,
                     minWidth: 220,
@@ -253,7 +261,7 @@ export default function RestaurantPage() {
                     )}
                     {cart.length > 0 && (
                         <div style={{ marginTop: 16, color: '#ffd700', fontWeight: 600 }}>
-                            Total: ${cart.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0).toFixed(2)}
+                            Total: ₹{cart.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0).toFixed(2)}
                         </div>
                     )}
                 </div>

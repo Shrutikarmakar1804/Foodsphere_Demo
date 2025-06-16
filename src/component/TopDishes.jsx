@@ -71,7 +71,7 @@ const dishes = [
       'A traditional Greek dish',
       'made with meat cooked on a vertical rotisserie.'
     ],
-    price:  150,
+    price: 150,
     image: 'https://images.pexels.com/photos/29906167/pexels-photo-29906167/free-photo-of-delicious-greek-gyros-on-sunny-day.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   },
   {

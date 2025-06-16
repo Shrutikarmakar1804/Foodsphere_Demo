@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, ratingClasses } from "@mui/material";
 import RestaurantCard from "../Restaurant/RestaurantCard";
 import { motion } from "framer-motion";
 
@@ -12,7 +12,6 @@ const demoFavorites = [
     cuisine: "Cafe",
     rating: 4.2,
     address: "42 Peace Ave, Hilltown",
-    status: "Open"
   },
   {
     id: 2,
@@ -21,7 +20,6 @@ const demoFavorites = [
     cuisine: "Asian Fusion",
     rating: 4.8,
     address: "88 Dragon Street, Chinatown",
-    status: "Closed"
   },
   {
     id: 3,
@@ -30,43 +28,38 @@ const demoFavorites = [
     cuisine: "Mexican",
     rating: 4.5,
     address: "15 Sunset Blvd, Southside",
-    status: "Open"
   },
-  {
+   {
     id: 4,
     name: "Pasta Perfection",
     images: ["https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
     cuisine: "Italian",
     rating: 4.7,
     address: "77 Pasta Lane, Downtown",
-    status: "Closed"
   },
   {
     id: 5,
     name: "Spice Symphony",
-    images: ["https://images.pexels.com/photos/13063314/pexels-photo-13063314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
+    images:["https://images.pexels.com/photos/13063314/pexels-photo-13063314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
     cuisine: "Indian",
     rating: 4.6,
     address: "23 Curry Road, Eastside",
-    status: "Open"
   },
   {
     id: 6,
     name: "Burger Haven",
-    images: ["https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
+    images:["https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
     cuisine: "American",
     rating: 4.3,
     address: "99 Burger Street, Westside",
-    status: "Open"
   },
   {
     id: 7,
-    name: "Taco Fiesta",
-    images: ["https://images.pexels.com/photos/8230019/pexels-photo-8230019.jpeg?auto=compress&cs=tinysrgb&w=600"],
-    cuisine: "Mexican",
-    rating: 4.6,
-    address: "45 Taco Street, Fiesta Town",
-    status: "Open"
+    name: "Sushi Sensation",
+    images: ["https://images.pexels.com/photos/4828151/pexels-photo-4828151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
+    cuisine: "Japanese",
+    rating: 4.9,
+    address: "30 Sushi Way, Uptown",
   },
   {
     id: 8,
@@ -99,7 +92,6 @@ const demoFavorites = [
     cuisine: "Cafe",
     rating: 4.3,
     address: "20 Coffee Lane, Brew City",
-    status: "Closed"
   },
   {
     id: 12,
@@ -117,7 +109,6 @@ const demoFavorites = [
     cuisine: "Italian",
     rating: 4.8,
     address: "80 Pizza Avenue, Slice City",
-    status: "Closed"
   },
   {
     id: 14,
@@ -126,7 +117,6 @@ const demoFavorites = [
     cuisine: "Indian",
     rating: "4.5",
     address: "35 Curry Lane, Spice Town",
-    status: "Closed"
   },
   {
     id: 15,
@@ -135,19 +125,15 @@ const demoFavorites = [
     cuisine: "Asian Fusion",
     rating: 4.7,
     address: "90 Noodle Street, Wok City",
-    status: "Closed"
   }
+  // ...add more items as needed
 ];
-
-// Add default status and sort with Open first
-const sortedFavorites = demoFavorites
-  .map(item => ({ ...item, status: item.status || "Closed" }))
-  .sort((a, b) => (a.status === "Open" ? -1 : 1));
 
 const Favourites = () => {
   return (
     <Card className="max-w-6xl mx-auto mt-12 px-6 py-10 shadow-2xl rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <CardContent>
+        {/* Animated Gradient Heading */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -157,9 +143,9 @@ const Favourites = () => {
           Favourites
         </motion.h1>
 
-        {sortedFavorites.length > 0 ? (
+        {demoFavorites.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {sortedFavorites.map((item, index) => (
+            {demoFavorites.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
